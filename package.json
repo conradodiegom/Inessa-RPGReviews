@@ -1,0 +1,27 @@
+{
+  "name": "inessa-rpgreviews",
+  "version": "1.0.0",
+  "description": "Este projeto tem como objetivo implementar progressivamente e de forma didática uma aplicação web onde jogadores e mestres de RPG de mesa podem registrar os sistemas que já jogaram, avaliá-los com nota e review, e explorar as avaliações de outros usuários em uma vitrine de perfil.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "api": "json-server --watch db.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conradodiegom/Inessa-RPGReviews.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/conradodiegom/Inessa-RPGReviews/issues"
+  },
+  "homepage": "https://github.com/conradodiegom/Inessa-RPGReviews#readme",
+  "dependencies": {
+    "json-server": "^0.17.4"
+  }
+}

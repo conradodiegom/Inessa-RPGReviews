@@ -1,0 +1,49 @@
+{
+    "usuarios": [
+    {
+        "id": "1",
+        "nome": "Ana Mestra",
+        "email": "ana@email.com",
+        "senha": "senha_super_segura",
+        "tipo": "USUARIO"
+    },
+    {
+        "id": "2",
+        "nome": "Admin Poço Penumbra",
+        "email": "admin@inessarpgreviews.com",
+        "senha": "senha_super_segura",
+        "tipo": "ADMIN"
+    }],
+    "sistemas": [
+    {
+        "id": "1",
+        "nome": "Ordem Paranormal",
+        "editora": "Editora Omni",
+        "ano": 2018,
+        "genero": "Terror/Horror",
+        "mecanica": "d20",
+        "notaMedia": 4.5
+    }],
+    "avaliacoes": [
+    {
+        "id": "1",
+        "usuarioId": "1",
+        "sistemaId": "1",
+        "nota": 5,
+        "texto": "Ótima atmosfera de horror, recomendo mestrar.",
+        "papel": "MESTRE",
+        "statusConsumo": "JOGOU",
+        "statusModeracao": "APROVADA",
+        "data": "2026-03-16"
+    }],
+    "sugestoes": [
+    {
+        "id": "1",
+        "usuarioId": "1",
+        "nomeSistema": "Tormenta20",
+        "editora": "Jambô Editora",
+        "genero": "Fantasia",
+        "statusSugestao": "PENDENTE",
+        "data": "2026-03-16"
+    }]
+}

@@ -1,49 +1,187 @@
 {
-    "usuarios": [
+  "usuarios": [
     {
-        "id": "1",
-        "nome": "Ana Mestra",
-        "email": "ana@email.com",
-        "senha": "senha_super_segura",
-        "tipo": "USUARIO"
+      "id": "1",
+      "nome": "Ana Mestra",
+      "email": "ana@email.com",
+      "senha": "senha_super_segura",
+      "tipo": "USUARIO"
     },
     {
-        "id": "2",
-        "nome": "Admin Poço Penumbra",
-        "email": "admin@inessarpgreviews.com",
-        "senha": "senha_super_segura",
-        "tipo": "ADMIN"
-    }],
-    "sistemas": [
+      "id": "2",
+      "nome": "Admin Poço Penumbra",
+      "email": "admin@inessarpgreviews.com",
+      "senha": "senha_super_segura",
+      "tipo": "ADMIN"
+    },
     {
-        "id": "1",
-        "nome": "Ordem Paranormal",
-        "editora": "Editora Omni",
-        "ano": 2018,
-        "genero": "Terror/Horror",
-        "mecanica": "d20",
-        "notaMedia": 4.5
-    }],
-    "avaliacoes": [
+      "id": "3",
+      "nome": "Lucas Valente",
+      "email": "lucas@email.com",
+      "senha": "senha_super_segura",
+      "tipo": "USUARIO"
+    }
+  ],
+  "sistemas": [
     {
-        "id": "1",
-        "usuarioId": "1",
-        "sistemaId": "1",
-        "nota": 5,
-        "texto": "Ótima atmosfera de horror, recomendo mestrar.",
-        "papel": "MESTRE",
-        "statusConsumo": "JOGOU",
-        "statusModeracao": "APROVADA",
-        "data": "2026-03-16"
-    }],
-    "sugestoes": [
+      "id": "1",
+      "nome": "Ordem Paranormal",
+      "editora": "Jambô Editora",
+      "ano": 2022,
+      "genero": "Terror",
+      "mecanica": "d20",
+      "notaMedia": 4.7
+    },
     {
-        "id": "1",
-        "usuarioId": "1",
-        "nomeSistema": "Tormenta20",
-        "editora": "Jambô Editora",
-        "genero": "Fantasia",
-        "statusSugestao": "PENDENTE",
-        "data": "2026-03-16"
-    }]
+      "id": "2",
+      "nome": "Tormenta20",
+      "editora": "Jambô Editora",
+      "ano": 2020,
+      "genero": "Fantasia",
+      "mecanica": "d20",
+      "notaMedia": 4.8
+    },
+    {
+      "id": "3",
+      "nome": "Call of Cthulhu 7e",
+      "editora": "Chaosium / New Order",
+      "ano": 2014,
+      "genero": "Terror",
+      "mecanica": "d100",
+      "notaMedia": 4.6
+    },
+    {
+      "id": "4",
+      "nome": "Dungeons & Dragons 5e",
+      "editora": "Wizards of the Coast",
+      "ano": 2014,
+      "genero": "Fantasia Heroica",
+      "mecanica": "d20",
+      "notaMedia": 4.5
+    },
+    {
+      "id": "5",
+      "nome": "Vampiro: A Máscara 5ª",
+      "editora": "Galápagos Jogos",
+      "ano": 2018,
+      "genero": "Horror Pessoal",
+      "mecanica": "Dice Pool",
+      "notaMedia": 4.4
+    },
+    {
+      "id": "6",
+      "nome": "Blades in the Dark",
+      "editora": "Buró Brasil",
+      "ano": 2017,
+      "genero": "Fantasia Urbana",
+      "mecanica": "PbtA",
+      "notaMedia": 4.7
+    },
+    {
+      "id": "7",
+      "nome": "Pathfinder 2e",
+      "editora": "New Order Editora",
+      "ano": 2019,
+      "genero": "Alta Fantasia",
+      "mecanica": "d20",
+      "notaMedia": 4.6
+    },
+    {
+      "id": "8",
+      "nome": "Monster of the Week",
+      "editora": "Retropunk",
+      "ano": 2015,
+      "genero": "Investigação",
+      "mecanica": "PbtA",
+      "notaMedia": 4.3
+    },
+    {
+      "id": "9",
+      "nome": "Cyberpunk RED",
+      "editora": "Devir",
+      "ano": 2020,
+      "genero": "Cyberpunk",
+      "mecanica": "Narrativo",
+      "notaMedia": 4.2
+    }
+  ],
+  "avaliacoes": [
+    {
+      "id": "1",
+      "usuarioId": "1",
+      "sistemaId": "1",
+      "nota": 5,
+      "texto": "Ótima atmosfera de horror investigativo, o sistema de sanidade e rituais engaja demais a mesa. Recomendo mestrar!",
+      "papel": "MESTRE",
+      "statusConsumo": "JOGOU",
+      "statusModeracao": "APROVADA",
+      "data": "2026-03-16"
+    },
+    {
+      "id": "2",
+      "usuarioId": "3",
+      "sistemaId": "1",
+      "nota": 4,
+      "texto": "Muito divertido criar agentes da Ordo Realitas. Em níveis altos o combate fica bem letal.",
+      "papel": "JOGADOR",
+      "statusConsumo": "JOGANDO",
+      "statusModeracao": "APROVADA",
+      "data": "2026-03-18"
+    },
+    {
+      "id": "3",
+      "usuarioId": "1",
+      "sistemaId": "2",
+      "nota": 5,
+      "texto": "O cenário de Arton está incrível na edição Jogo do Ano. Customização de personagens com poderes gerais é excelente.",
+      "papel": "JOGADOR",
+      "statusConsumo": "JOGANDO",
+      "statusModeracao": "APROVADA",
+      "data": "2026-03-20"
+    },
+    {
+      "id": "4",
+      "usuarioId": "3",
+      "sistemaId": "4",
+      "nota": 5,
+      "texto": "Porta de entrada clássica para o RPG de fantasia medieval. Fácil de ensinar para iniciantes e cheio de material de referência.",
+      "papel": "MESTRE",
+      "statusConsumo": "JOGOU",
+      "statusModeracao": "APROVADA",
+      "data": "2026-03-22"
+    },
+    {
+      "id": "5",
+      "usuarioId": "1",
+      "sistemaId": "6",
+      "nota": 5,
+      "texto": "A mecânica de Flashback e os relógios de progresso mudaram minha forma de mestrar golpes e cenas de ação.",
+      "papel": "MESTRE",
+      "statusConsumo": "QUERO_JOGAR",
+      "statusModeracao": "APROVADA",
+      "data": "2026-03-25"
+    },
+    {
+      "id": "6",
+      "usuarioId": "3",
+      "sistemaId": "1",
+      "nota": 5,
+      "texto": "Joguei uma campanha de seis meses em Carpazinha e foi inesquecível! Aguardando aprovação da moderação.",
+      "papel": "JOGADOR",
+      "statusConsumo": "JOGOU",
+      "statusModeracao": "PENDENTE",
+      "data": "2026-04-01"
+    }
+  ],
+  "sugestoes": [
+    {
+      "id": "1",
+      "usuarioId": "1",
+      "nomeSistema": "Skyfall RPG",
+      "editora": "Capitur / Mestre Pedrok",
+      "genero": "Fantasia",
+      "statusSugestao": "PENDENTE",
+      "data": "2026-03-16"
+    }
+  ]
 }

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil (Vitrine) — Inessa RPG Reviews</title>
+
+  <!-- Google Fonts extraídas do Figma: Roboto Flex e Open Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700;8..144,800&display=swap" rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- MaterializeCSS via CDN (ID 02 e ID 04) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- Estilos Globais e Design System -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- =====================================================================
+       HEADER / NAVBAR GLOBAL (Idêntico em todas as páginas)
+       ===================================================================== -->
+  <header class="inessa-header">
+    <div class="inessa-container inessa-header__inner">
+
+      <div style="display: flex; align-items: center; gap: 1.5rem; height: 100%;">
+        <a href="../index.html" class="inessa-brand" aria-label="Inessa RPG Reviews - Início">
+          <span class="inessa-brand__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="inessa-brand__text">
+            <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+            <span class="inessa-brand__subtitle">VITRINE DO AVENTUREIRO</span>
+          </span>
+        </a>
+
+        <ul class="inessa-nav-links">
+          <li class="inessa-nav-links__item">
+            <a href="../index.html" class="inessa-nav-links__link">Catálogo</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="../index.html#mais-avaliados" class="inessa-nav-links__link">Mais Avaliados</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="sugerir.html" class="inessa-nav-links__link">Sugerir Sistema</a>
+          </li>
+          <li class="inessa-nav-links__item nav-admin-only" style="display: none;">
+            <a href="admin.html" class="inessa-nav-links__link">Painel Moderação</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Centro (Desktop): Campo de busca rápida -->
+      <form id="header-search-form" class="inessa-header__search" role="search">
+        <i class="material-icons inessa-header__search-icon">search</i>
+        <input
+          type="search"
+          id="header-search-input"
+          class="inessa-header__search-input browser-default"
+          placeholder="Buscar sistemas, suplementos, autores..."
+          aria-label="Buscar sistemas de RPG"
+        >
+      </form>
+
+      <!-- Direita: Ações Desktop e Mobile -->
+      <div class="inessa-header__actions">
+
+        <div class="inessa-header__desktop-actions">
+          <button type="button" class="btn-inessa btn-inessa--accent js-open-review-modal">
+            Escrever Resenha
+          </button>
+
+          <div id="nav-guest-actions" style="display: flex; align-items: center; gap: 0.5rem;">
+            <a href="login.html" class="btn-inessa btn-inessa--ghost">Entrar</a>
+            <a href="login.html#cadastro" class="btn-inessa btn-inessa--primary">Criar Conta</a>
+          </div>
+
+          <div id="nav-user-actions" style="display: none; align-items: center; gap: 0.5rem;">
+            <a href="perfil.html" class="btn-inessa btn-inessa--ghost">
+              <span id="nav-user-name">Perfil</span>
+            </a>
+            <button type="button" id="btn-logout" class="btn-inessa btn-inessa--ghost">
+              Sair
+            </button>
+          </div>
+
+          <a href="perfil.html" class="inessa-avatar-btn" title="Meu Perfil" aria-label="Meu Perfil">
+            <span class="js-user-initials">
+              <i class="material-icons" style="font-size: 1.1rem;">person_outline</i>
+            </span>
+          </a>
+        </div>
+
+        <div class="inessa-header__mobile-actions">
+          <a href="../index.html" class="inessa-icon-btn" aria-label="Buscar sistemas">
+            <i class="material-icons">search</i>
+          </a>
+          <a href="perfil.html" class="inessa-avatar-btn" aria-label="Meu Perfil">
+            <span class="js-user-initials">
+              <i class="material-icons" style="font-size: 1.1rem;">person_outline</i>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       CONTEÚDO PRINCIPAL — PERFIL DO USUÁRIO / VITRINE (Etapa 6)
+       Reproduz fielmente o Frame 1:2711 do Figma
+       ===================================================================== -->
+  <main id="conteudo-principal">
+    <div class="inessa-container profile-page-wrap">
+
+      <!-- Aviso caso o visitante não esteja logado (exibe vitrine demonstrativa de Ana Mestra) -->
+      <div
+        id="profile-guest-notice"
+        style="display: none; padding: 0.875rem 1.125rem; border-radius: var(--radius-lg); background-color: var(--color-primary-tint); color: var(--color-primary-deep); align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;"
+        role="status"
+      >
+        <div style="display: flex; align-items: center; gap: 0.625rem;">
+          <i class="material-icons" aria-hidden="true">info_outline</i>
+          <span style="font-size: 0.875rem;">
+            Você está visualizando a vitrine demonstrativa de <strong>Ana Mestra</strong>. Entre na sua conta para gerenciar sua própria estante!
+          </span>
+        </div>
+        <a href="login.html" class="btn-inessa btn-inessa--primary">Entrar na Minha Conta</a>
+      </div>
+
+      <!-- =================================================================
+           SEÇÃO 1: BANNER IMERSIVO & CARTÃO PRINCIPAL DE PERFIL (Frame 1:2725)
+           ================================================================= -->
+      <section class="profile-hero-card" aria-labelledby="profile-user-name">
+        <div class="profile-hero-card__banner" aria-hidden="true"></div>
+
+        <div class="profile-hero-card__body">
+          <div class="profile-hero-card__identity">
+            <!-- Avatar 96x96px com Moldura e Badge D20 (Frame 1:2786) -->
+            <div class="profile-avatar-wrap">
+              <div id="profile-avatar-initials" class="profile-avatar-circle" aria-hidden="true">
+                A
+              </div>
+              <span class="profile-avatar-badge">
+                <i class="material-icons" aria-hidden="true">shield</i>
+                <span id="profile-role-badge-text">MESTRE</span>
+              </span>
+            </div>
+
+            <!-- Nome, Handle e Bio do Narrador/Jogador -->
+            <div class="profile-user-details">
+              <h1 id="profile-user-name" class="profile-user-details__name">Ana Mestra</h1>
+              <p id="profile-user-handle" class="profile-user-details__handle">
+                ana@email.com • Guilda Brasileira de TTRPG
+              </p>
+              <p id="profile-user-bio" class="profile-user-details__bio">
+                Narradora de horror investigativo e fantasia sombria. Colecionando grimórios, rolando dados críticos e registrando crônicas de mesa.
+              </p>
+            </div>
+          </div>
+
+          <!-- Botões de Ação do Perfil (Frame 1:2775) -->
+          <div class="profile-hero-card__actions">
+            <button type="button" class="btn-inessa btn-inessa--primary js-open-review-modal">
+              <i class="material-icons" style="font-size: 1rem; color: var(--color-accent);" aria-hidden="true">add_circle</i>
+              <span>Avaliar Sistema</span>
+            </button>
+            <button type="button" id="btn-share-profile" class="btn-inessa btn-inessa--ghost" style="background: var(--color-bg-surface);">
+              <i class="material-icons" style="font-size: 1rem;" aria-hidden="true">share</i>
+              <span>Compartilhar Vitrine</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Estatísticas do Perfil em Grade Compacta (Frame 1:2726) -->
+        <div class="profile-stats-grid" aria-label="Estatísticas do aventureiro">
+          <div class="profile-stat-card">
+            <span class="profile-stat-card__icon" aria-hidden="true">
+              <i class="material-icons">menu_book</i>
+            </span>
+            <div>
+              <p id="stat-total-systems" class="profile-stat-card__value">0</p>
+              <p class="profile-stat-card__label">Sistemas na Vitrine</p>
+            </div>
+          </div>
+
+          <div class="profile-stat-card">
+            <span class="profile-stat-card__icon profile-stat-card__icon--gold" aria-hidden="true">
+              <i class="material-icons">star</i>
+            </span>
+            <div>
+              <p id="stat-avg-rating" class="profile-stat-card__value">0.0</p>
+              <p class="profile-stat-card__label">Nota Média Dada</p>
+            </div>
+          </div>
+
+          <div class="profile-stat-card">
+            <span class="profile-stat-card__icon" aria-hidden="true">
+              <i class="material-icons">shield</i>
+            </span>
+            <div>
+              <p id="stat-count-gm" class="profile-stat-card__value">0</p>
+              <p class="profile-stat-card__label">Mesas como Mestre</p>
+            </div>
+          </div>
+
+          <div class="profile-stat-card">
+            <span class="profile-stat-card__icon profile-stat-card__icon--teal" aria-hidden="true">
+              <i class="material-icons">person</i>
+            </span>
+            <div>
+              <p id="stat-count-player" class="profile-stat-card__value">0</p>
+              <p class="profile-stat-card__label">Como Jogador(a)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           SEÇÃO 2: ABAS INTERATIVAS DA VITRINE (Jogando, Já joguei, Quero jogar)
+           Reproduz o Frame 1:3000 com Indicador Ativo Dourado Material
+           ================================================================= -->
+      <section aria-label="Abas de status de consumo da vitrine">
+        <div class="profile-tabs-bar">
+          <div class="profile-tabs-list" role="tablist">
+            <button
+              type="button"
+              class="profile-tab-btn js-profile-tab active"
+              role="tab"
+              aria-selected="true"
+              data-status="JOGANDO"
+            >
+              <i class="material-icons" style="font-size: 1.05rem;" aria-hidden="true">play_circle_outline</i>
+              <span>Jogando</span>
+              <span id="count-tab-jogando" class="profile-tab-count">0</span>
+            </button>
+
+            <button
+              type="button"
+              class="profile-tab-btn js-profile-tab"
+              role="tab"
+              aria-selected="false"
+              data-status="JOGOU"
+            >
+              <i class="material-icons" style="font-size: 1.05rem;" aria-hidden="true">check_circle_outline</i>
+              <span>Já joguei</span>
+              <span id="count-tab-jogou" class="profile-tab-count">0</span>
+            </button>
+
+            <button
+              type="button"
+              class="profile-tab-btn js-profile-tab"
+              role="tab"
+              aria-selected="false"
+              data-status="QUERO_JOGAR"
+            >
+              <i class="material-icons" style="font-size: 1.05rem;" aria-hidden="true">bookmark_border</i>
+              <span>Quero jogar</span>
+              <span id="count-tab-quero" class="profile-tab-count">0</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra de Filtros de Papel e Ordenação (Frame 1:2714) -->
+        <div class="profile-filter-bar" style="margin-top: 0.875rem;">
+          <div id="profile-role-filters" class="catalog-chips-row">
+            <button type="button" class="inessa-chip js-profile-role-chip active" data-role="TODOS">
+              Todos os papéis
+            </button>
+            <button type="button" class="inessa-chip js-profile-role-chip" data-role="MESTRE">
+              <i class="material-icons" style="font-size: 0.9rem; color: var(--color-accent-contrast);">shield</i>
+              <span>Como Mestre</span>
+            </button>
+            <button type="button" class="inessa-chip js-profile-role-chip" data-role="JOGADOR">
+              <i class="material-icons" style="font-size: 0.9rem; color: var(--color-teal);">person</i>
+              <span>Como Jogador(a)</span>
+            </button>
+          </div>
+
+          <button type="button" id="btn-sort-showcase" class="inessa-chip" title="Alternar ordenação">
+            <i class="material-icons" style="font-size: 1rem;">sort</i>
+            <span id="sort-showcase-label">Mais recentes</span>
+          </button>
+        </div>
+
+        <!-- Grid de Cards da Vitrine (Frame 1:2796) -->
+        <div id="profile-showcase-grid" class="profile-showcase-grid" style="margin-top: 1rem;">
+          <!-- Preenchido dinamicamente via js/perfil.js -->
+        </div>
+      </section>
+
+      <!-- =================================================================
+           SEÇÃO 3: MOMENTO DE DELEITE — ROLAR DADO DA SORTE (Frame 1:2993)
+           ================================================================= -->
+      <section class="lucky-dice-banner" aria-label="Sugestão aleatória de sistema">
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 800; color: var(--color-primary-deep); margin: 0;">
+            Em dúvida sobre qual campanha abrir na próxima sessão?
+          </h2>
+          <p style="font-size: 0.8125rem; color: var(--color-text-secondary); margin: 0.125rem 0 0 0;">
+            Role um d20 do destino e deixe o grimório sortear um sistema do catálogo para sua mesa.
+          </p>
+        </div>
+        <button type="button" id="btn-roll-lucky-d20" class="btn-inessa btn-inessa--primary">
+          <i class="material-icons" style="font-size: 1.1rem; color: var(--color-accent);" aria-hidden="true">casino</i>
+          <span>Rolar Dado da Sorte (d20)</span>
+        </button>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       RODAPÉ / FOOTER GLOBAL (Mobile + Desktop)
+       ===================================================================== -->
+  <footer class="inessa-footer">
+    <div class="inessa-container">
+
+      <div class="inessa-footer__mobile">
+        <p class="inessa-footer__mobile-copy">
+          Inessa RPG Reviews © 2025 • A comunidade brasileira de sistemas de RPG
+        </p>
+        <nav class="inessa-footer__mobile-links" aria-label="Links do rodapé mobile">
+          <a href="../index.html">Sobre</a>
+          <span class="inessa-footer__dot">•</span>
+          <a href="../index.html">Diretrizes de Avaliação</a>
+          <span class="inessa-footer__dot nav-admin-only" style="display: none;">•</span>
+          <a href="admin.html" class="nav-admin-only" style="display: none;">Painel de Moderação</a>
+        </nav>
+      </div>
+
+      <div class="inessa-footer__desktop">
+        <div class="inessa-footer__grid">
+          <div>
+            <a href="../index.html" class="inessa-brand">
+              <span class="inessa-brand__icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="inessa-brand__text">
+                <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+              </span>
+            </a>
+            <p class="inessa-footer__brand-desc">
+              O grimoire editorial da comunidade brasileira de RPG de mesa. Descubra sistemas,
+              compartilhe crônicas e registre suas experiências como mestre ou jogador.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Explorar</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Catálogo de Sistemas</a></li>
+              <li><a href="../index.html#mais-avaliados">Mais Avaliados da Comunidade</a></li>
+              <li><a href="sugerir.html">Submeter Novo Livro</a></li>
+              <li><a href="#modal-avaliacao" class="js-open-review-modal">Nova Resenha</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Comunidade &amp; Regras</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Diretrizes Editoriais</a></li>
+              <li><a href="../index.html">Código de Conduta do Aventureiro</a></li>
+              <li><a href="../index.html">Classificação Etária &amp; Gatilhos</a></li>
+              <li><a href="admin.html">Central de Moderação</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Inessa RPG</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Sobre o Projeto</a></li>
+              <li><a href="../index.html">Apoie no Catarse</a></li>
+              <li><a href="https://www.dnd5eapi.co/" target="_blank" rel="noopener noreferrer">API Aberta para Mestres</a></li>
+              <li><a href="../index.html">Contato &amp; Imprensa</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="inessa-footer__bottom-bar">
+          <span>© 2025 Inessa RPG Reviews. Feito para a comunidade de TTRPG brasileira. Todos os direitos reservados.</span>
+          <span class="inessa-footer__version">Versão 2.4.0 Grimório</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       BOTTOM NAVIGATION BAR (Exclusiva Mobile < 992px)
+       ===================================================================== -->
+  <nav class="inessa-bottom-nav" aria-label="Navegação inferior mobile">
+    <a href="../index.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">menu_book</i>
+      <span>Catálogo</span>
+    </a>
+    <a href="#modal-avaliacao" class="inessa-bottom-nav__link js-open-review-modal">
+      <i class="material-icons">rate_review</i>
+      <span>Avaliar</span>
+    </a>
+    <a href="sugerir.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">add_circle_outline</i>
+      <span>Sugerir</span>
+    </a>
+    <a href="perfil.html" class="inessa-bottom-nav__link active">
+      <i class="material-icons">account_circle</i>
+      <span>Meu Perfil</span>
+    </a>
+  </nav>
+
+  <!-- Dependências JS via CDN: jQuery + MaterializeCSS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Scripts modulares da aplicação (ID 18) -->
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/avaliacao.js"></script>
+  <script src="../js/perfil.js"></script>
+</body>
+</html>

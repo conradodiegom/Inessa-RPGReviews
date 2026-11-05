@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Sistema — Inessa RPG Reviews</title>
+
+  <!-- Google Fonts extraídas do Figma: Roboto Flex e Open Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700;8..144,800&display=swap" rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- MaterializeCSS via CDN (ID 02 e ID 04) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- Estilos Globais e Design System -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- =====================================================================
+       HEADER / NAVBAR GLOBAL (Idêntico em todas as páginas)
+       ===================================================================== -->
+  <header class="inessa-header">
+    <div class="inessa-container inessa-header__inner">
+
+      <div style="display: flex; align-items: center; gap: 0.75rem; height: 100%;">
+        <!-- Seta de voltar para o catálogo (visível no mobile conforme Frame 1:332) -->
+        <a href="../index.html" class="inessa-icon-btn" title="Voltar ao Catálogo" aria-label="Voltar ao Catálogo">
+          <i class="material-icons">arrow_back</i>
+        </a>
+
+        <a href="../index.html" class="inessa-brand" aria-label="Inessa RPG Reviews - Início">
+          <span class="inessa-brand__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="inessa-brand__text">
+            <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+            <span class="inessa-brand__subtitle">DETALHES DO SISTEMA</span>
+          </span>
+        </a>
+
+        <ul class="inessa-nav-links" style="margin-left: 0.75rem;">
+          <li class="inessa-nav-links__item">
+            <a href="../index.html" class="inessa-nav-links__link active">Catálogo</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="../index.html#mais-avaliados" class="inessa-nav-links__link">Mais Avaliados</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="sugerir.html" class="inessa-nav-links__link">Sugerir Sistema</a>
+          </li>
+          <li class="inessa-nav-links__item nav-admin-only" style="display: none;">
+            <a href="admin.html" class="inessa-nav-links__link">Painel Moderação</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Centro (Desktop): Campo de busca rápida -->
+      <form id="header-search-form" class="inessa-header__search" role="search">
+        <i class="material-icons inessa-header__search-icon">search</i>
+        <input
+          type="search"
+          id="header-search-input"
+          class="inessa-header__search-input browser-default"
+          placeholder="Buscar sistemas, suplementos, autores..."
+          aria-label="Buscar sistemas de RPG"
+        >
+      </form>
+
+      <!-- Direita: Ações Desktop e Mobile -->
+      <div class="inessa-header__actions">
+
+        <div class="inessa-header__desktop-actions">
+          <button type="button" class="btn-inessa btn-inessa--accent js-open-review-modal">
+            Escrever Resenha
+          </button>
+
+          <div id="nav-guest-actions" style="display: flex; align-items: center; gap: 0.5rem;">
+            <a href="login.html" class="btn-inessa btn-inessa--ghost">Entrar</a>
+            <a href="login.html#cadastro" class="btn-inessa btn-inessa--primary">Criar Conta</a>
+          </div>
+
+          <div id="nav-user-actions" style="display: none; align-items: center; gap: 0.5rem;">
+            <a href="perfil.html" class="btn-inessa btn-inessa--ghost">
+              <span id="nav-user-name">Perfil</span>
+            </a>
+            <button type="button" id="btn-logout" class="btn-inessa btn-inessa--ghost">
+              Sair
+            </button>
+          </div>
+
+          <a href="perfil.html" class="inessa-avatar-btn" title="Meu Perfil" aria-label="Meu Perfil">
+            <span class="js-user-initials">
+              <i class="material-icons" style="font-size: 1.1rem;">person_outline</i>
+            </span>
+          </a>
+        </div>
+
+        <div class="inessa-header__mobile-actions">
+          <a href="perfil.html" class="inessa-avatar-btn" aria-label="Meu Perfil">
+            <span class="js-user-initials">
+              <i class="material-icons" style="font-size: 1.1rem;">person_outline</i>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       CONTEÚDO PRINCIPAL — PÁGINA DO SISTEMA (Etapa 3)
+       Reproduz fielmente o Frame 1:2 do Figma
+       ===================================================================== -->
+  <main id="conteudo-principal">
+    <div class="inessa-container">
+
+      <!-- Aviso caso o JSON Server esteja desligado -->
+      <div
+        id="system-api-warning"
+        style="display: none; margin-top: 1rem; padding: 0.75rem 1rem; border-radius: var(--radius-md); background-color: var(--color-accent-tint); color: var(--color-accent-contrast); font-size: 0.8125rem;"
+        role="status"
+      >
+        <strong>Modo de demonstração:</strong> O servidor JSON Server (<code>npm run api</code> na porta 3000) não foi detectado. Exibindo ficha e avaliações locais de segurança.
+      </div>
+
+      <div class="system-page-grid">
+
+        <!-- COLUNA ESQUERDA (ou Topo no Mobile): Card de Identificação do Sistema -->
+        <section aria-labelledby="system-title">
+          <div class="system-hero-card">
+            <div class="system-hero-card__glow" aria-hidden="true"></div>
+
+            <div class="system-hero-card__top">
+              <!-- Capa 3:4 com WebP + PNG e badge OFICIAL -->
+              <div class="system-hero-card__cover-wrap">
+                <picture>
+                  <source id="system-cover-webp" srcset="../img/ordem-paranormal.webp" type="image/webp">
+                  <img
+                    id="system-cover-img"
+                    src="../img/ordem-paranormal.png"
+                    alt="Capa do Sistema"
+                    class="img-cover"
+                  >
+                </picture>
+                <span class="system-hero-card__official-badge">OFICIAL</span>
+              </div>
+
+              <!-- Dados Principais da Ficha -->
+              <div class="system-hero-card__info">
+                <span class="system-hero-card__eyebrow">
+                  <i class="material-icons" aria-hidden="true">star</i>
+                  <span id="system-eyebrow-text">TTRPG Brasileiro</span>
+                </span>
+
+                <h1 id="system-title" class="system-hero-card__title">Carregando...</h1>
+
+                <p id="system-authors" class="system-hero-card__authors">
+                  Por <strong>...</strong>
+                </p>
+
+                <div class="system-hero-card__meta-pills">
+                  <span id="system-publisher-pill" class="meta-pill">Editora</span>
+                  <span id="system-year-pill" class="meta-pill">Ano</span>
+                  <span id="system-mechanic-pill" class="meta-pill meta-pill--mechanic">Mecânica</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tags de Gênero & Ambientação -->
+            <div id="system-tags-container" class="system-hero-card__tags" aria-label="Tags de gênero e ambientação">
+              <!-- Preenchido via js/sistema.js -->
+            </div>
+
+            <!-- Botões de Ação do Sistema -->
+            <div class="system-hero-card__actions">
+              <button type="button" class="btn-evaluate-primary js-open-review-modal">
+                <i class="material-icons" aria-hidden="true">star</i>
+                <span>AVALIAR ESTE SISTEMA</span>
+              </button>
+              <button type="button" id="btn-add-wishlist" class="btn-wishlist-secondary">
+                <i class="material-icons" style="font-size: 1.1rem;" aria-hidden="true">bookmark_border</i>
+                <span>+ ADICIONAR À LISTA DE DESEJOS</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- COLUNA DIREITA: Estatísticas, D&D 5e API (condicional) e Lista de Reviews -->
+        <div>
+
+          <!-- Seção de Estatísticas e Avaliação Comunitária -->
+          <section aria-labelledby="titulo-avaliacoes-comunidade">
+            <div class="catalog-section__header" style="margin-bottom: 0.625rem;">
+              <div class="catalog-section__title-wrap">
+                <i class="material-icons catalog-section__icon--book" aria-hidden="true">assessment</i>
+                <h2 id="titulo-avaliacoes-comunidade" class="catalog-section__title">Avaliações da Comunidade</h2>
+              </div>
+              <span id="stats-total-count" class="catalog-section__counter">0 aprovadas</span>
+            </div>
+
+            <div class="stats-card">
+              <div class="stats-card__top">
+                <!-- Destaque Geral da Nota -->
+                <div>
+                  <div>
+                    <span id="stats-average-score" class="stats-card__score-big">0.0</span>
+                    <span class="stats-card__score-max">/ 5.0</span>
+                  </div>
+                  <div id="stats-stars-icons" class="stats-card__stars" aria-hidden="true">
+                    <!-- Estrelas geradas via JS -->
+                  </div>
+                  <p id="stats-rating-label" class="stats-card__label">Classificação Excelente</p>
+                </div>
+
+                <!-- Perfil dos Votantes (Mestres vs Jogadores) -->
+                <div class="voter-profile-box">
+                  <p class="voter-profile-box__title">PERFIL DOS VOTANTES</p>
+                  <div class="voter-profile-box__row">
+                    <span class="voter-profile-box__pct--gm">
+                      <i class="material-icons" style="font-size: 0.875rem;">shield</i>
+                      <span id="voter-gm-pct">35%</span>
+                    </span>
+                    <span style="color: var(--color-text-secondary);">Mestres</span>
+                  </div>
+                  <div class="voter-profile-box__bar" aria-hidden="true">
+                    <div id="voter-bar-gm" class="voter-profile-box__bar-gm" style="width: 35%;"></div>
+                    <div id="voter-bar-player" class="voter-profile-box__bar-player" style="width: 65%;"></div>
+                  </div>
+                  <div class="voter-profile-box__row">
+                    <span class="voter-profile-box__pct--player">
+                      <i class="material-icons" style="font-size: 0.875rem;">person</i>
+                      <span id="voter-player-pct">65%</span>
+                    </span>
+                    <span style="color: var(--color-text-secondary);">Jogadores</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gráfico de Distribuição das Estrelas (Material Bars 5 a 1) -->
+              <div id="star-distribution-bars" class="star-bars">
+                <!-- Preenchido via js/sistema.js -->
+              </div>
+            </div>
+          </section>
+
+          <!-- ===============================================================
+               SEÇÃO ESPECIAL: CONTEÚDO DE REFERÊNCIA (D&D 5e API — ID 24)
+               Exibida apenas quando o sistema é "Dungeons & Dragons 5e"
+               =============================================================== -->
+          <section
+            id="dnd5e-reference-section"
+            class="dnd-reference-card"
+            style="display: none;"
+            aria-labelledby="titulo-dnd-referencia"
+          >
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+              <div>
+                <span style="display: inline-block; background: var(--color-primary-tint); color: var(--color-primary-deep); font-family: var(--font-heading); font-weight: 700; font-size: 0.6875rem; padding: 0.15rem 0.6rem; border-radius: var(--radius-pill); letter-spacing: 0.05em;">
+                  SRD OFICIAL • D&amp;D 5E API
+                </span>
+                <h2 id="titulo-dnd-referencia" class="catalog-section__title" style="margin-top: 0.25rem;">
+                  Conteúdo de Referência (D&amp;D 5e)
+                </h2>
+                <p style="font-size: 0.8125rem; color: var(--color-text-secondary); margin: 0;">
+                  Dados públicos consumidos em tempo real de <code>dnd5eapi.co/api</code>. Clique em um item para inspecionar.
+                </p>
+              </div>
+
+              <div style="display: flex; gap: 0.5rem;">
+                <button type="button" class="inessa-chip js-dnd-tab active" data-endpoint="classes">
+                  Classes
+                </button>
+                <button type="button" class="inessa-chip js-dnd-tab" data-endpoint="spells">
+                  Magias (Spells)
+                </button>
+              </div>
+            </div>
+
+            <!-- Estado de carregamento da API externa -->
+            <div id="dnd-api-loading" style="padding: 1.25rem 0; font-size: 0.875rem; color: var(--color-text-secondary);">
+              Consultando dados oficiais na D&amp;D 5e API...
+            </div>
+
+            <!-- Mensagem de erro amigável caso a requisição à D&D 5e API falhe (ID 24) -->
+            <div
+              id="dnd-api-error"
+              style="display: none; margin-top: 0.75rem; padding: 1rem; border-radius: var(--radius-md); background-color: var(--color-danger-bg); color: var(--color-danger);"
+              role="alert"
+            >
+              <div style="display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-heading); font-weight: 700;">
+                <i class="material-icons">error_outline</i>
+                <span>Não foi possível carregar o Conteúdo de Referência da D&amp;D 5e API.</span>
+              </div>
+              <p style="font-size: 0.8125rem; margin: 0.375rem 0 0.75rem 0; color: var(--color-text-primary);">
+                O servidor público (<code>https://www.dnd5eapi.co/api</code>) pode estar temporariamente indisponível ou seu navegador está sem conexão com a internet.
+              </p>
+              <button type="button" id="btn-retry-dnd-api" class="btn-inessa btn-inessa--primary">
+                <i class="material-icons" style="font-size: 1rem;">refresh</i>
+                <span>Tentar Novamente</span>
+              </button>
+            </div>
+
+            <!-- Grid de Classes / Magias retornadas pela API -->
+            <div id="dnd-api-grid" class="dnd-reference-grid"></div>
+
+            <!-- Caixa de detalhe do item selecionado -->
+            <div
+              id="dnd-api-detail-box"
+              style="display: none; margin-top: 0.875rem; padding: 0.875rem 1rem; border-radius: var(--radius-md); background-color: var(--color-bg-surface); border-left: 0.25rem solid var(--color-accent);"
+            ></div>
+          </section>
+
+          <!-- Chips de Filtro Rápido das Resenhas (Frame 1:159) -->
+          <section style="margin-top: 1.25rem;" aria-label="Filtrar avaliações da comunidade">
+            <div id="review-filter-chips" class="catalog-chips-row">
+              <button type="button" class="inessa-chip js-review-filter active" data-filter="RECENTES">
+                Mais recentes
+              </button>
+              <button type="button" class="inessa-chip js-review-filter" data-filter="CURTIDAS">
+                Mais curtidas
+              </button>
+              <button type="button" class="inessa-chip js-review-filter" data-filter="MESTRES">
+                <span style="display: inline-block; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--color-accent-light); margin-right: 0.375rem;"></span>
+                Apenas Mestres
+              </button>
+              <button type="button" class="inessa-chip js-review-filter" data-filter="JOGADORES">
+                <span style="display: inline-block; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #70d8c8; margin-right: 0.375rem;"></span>
+                Apenas Jogadores
+              </button>
+            </div>
+
+            <!-- Lista de Resenhas APROVADAS -->
+            <div id="approved-reviews-list" class="reviews-list">
+              <!-- Preenchido via js/sistema.js -->
+            </div>
+          </section>
+
+          <!-- Card Inferior de Engajamento (Frame 1:305) -->
+          <section class="system-bottom-cta" aria-label="Compartilhar avaliação">
+            <div>
+              <h3 class="system-bottom-cta__title">Já mestrou ou jogou?</h3>
+              <p class="system-bottom-cta__desc">Compartilhe sua visão com a mesa brasileira.</p>
+            </div>
+            <button type="button" class="btn-inessa btn-inessa--accent js-open-review-modal">
+              ESCREVER
+            </button>
+          </section>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       RODAPÉ / FOOTER GLOBAL (Mobile + Desktop)
+       ===================================================================== -->
+  <footer class="inessa-footer">
+    <div class="inessa-container">
+
+      <div class="inessa-footer__mobile">
+        <p class="inessa-footer__mobile-copy">
+          Inessa RPG Reviews © 2025 • A comunidade brasileira de sistemas de RPG
+        </p>
+        <nav class="inessa-footer__mobile-links" aria-label="Links do rodapé mobile">
+          <a href="../index.html">Sobre</a>
+          <span class="inessa-footer__dot">•</span>
+          <a href="../index.html">Diretrizes de Avaliação</a>
+          <span class="inessa-footer__dot nav-admin-only" style="display: none;">•</span>
+          <a href="admin.html" class="nav-admin-only" style="display: none;">Painel de Moderação</a>
+        </nav>
+      </div>
+
+      <div class="inessa-footer__desktop">
+        <div class="inessa-footer__grid">
+          <div>
+            <a href="../index.html" class="inessa-brand">
+              <span class="inessa-brand__icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="inessa-brand__text">
+                <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+              </span>
+            </a>
+            <p class="inessa-footer__brand-desc">
+              O grimoire editorial da comunidade brasileira de RPG de mesa. Descubra sistemas,
+              compartilhe crônicas e registre suas experiências como mestre ou jogador.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Explorar</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Catálogo de Sistemas</a></li>
+              <li><a href="../index.html#mais-avaliados">Mais Avaliados da Comunidade</a></li>
+              <li><a href="sugerir.html">Submeter Novo Livro</a></li>
+              <li><a href="../index.html#todos-sistemas">Nova Resenha</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Comunidade &amp; Regras</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Diretrizes Editoriais</a></li>
+              <li><a href="../index.html">Código de Conduta do Aventureiro</a></li>
+              <li><a href="../index.html">Classificação Etária &amp; Gatilhos</a></li>
+              <li><a href="admin.html">Central de Moderação</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Inessa RPG</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Sobre o Projeto</a></li>
+              <li><a href="../index.html">Apoie no Catarse</a></li>
+              <li><a href="https://www.dnd5eapi.co/" target="_blank" rel="noopener noreferrer">API Aberta para Mestres</a></li>
+              <li><a href="../index.html">Contato &amp; Imprensa</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="inessa-footer__bottom-bar">
+          <span>© 2025 Inessa RPG Reviews. Feito para a comunidade de TTRPG brasileira. Todos os direitos reservados.</span>
+          <span class="inessa-footer__version">Versão 2.4.0 Grimório</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       BOTTOM NAVIGATION BAR (Exclusiva Mobile < 992px)
+       ===================================================================== -->
+  <nav class="inessa-bottom-nav" aria-label="Navegação inferior mobile">
+    <a href="../index.html" class="inessa-bottom-nav__link active">
+      <i class="material-icons">menu_book</i>
+      <span>Catálogo</span>
+    </a>
+    <a href="#modal-avaliacao" class="inessa-bottom-nav__link js-open-review-modal">
+      <i class="material-icons">rate_review</i>
+      <span>Avaliar</span>
+    </a>
+    <a href="sugerir.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">add_circle_outline</i>
+      <span>Sugerir</span>
+    </a>
+    <a href="perfil.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">account_circle</i>
+      <span>Meu Perfil</span>
+    </a>
+  </nav>
+
+  <!-- =====================================================================
+       MODAL DE AVALIAÇÃO DO MATERIALIZE (Etapa 5 — Frames 1:895 e 1:1880)
+       Contém nota 1 a 5, radio Jogador/Mestre (ID 13), select de status (ID 13),
+       textarea de resenha com validação (ID 11) e checkbox de spoilers (ID 13).
+       ===================================================================== -->
+  <div id="modal-avaliacao" class="modal inessa-review-modal" role="dialog" aria-labelledby="modal-review-system-title" aria-modal="true">
+    <div class="inessa-review-modal__accent-bar" aria-hidden="true"></div>
+
+    <!-- Cabeçalho do Modal -->
+    <header class="inessa-review-modal__header">
+      <div class="inessa-review-modal__sys-info">
+        <div class="inessa-review-modal__cover">
+          <img id="modal-review-cover" src="../img/ordem-paranormal.png" alt="Capa do sistema" class="img-cover">
+        </div>
+        <div style="flex: 1 1 auto; min-width: 0;">
+          <span class="inessa-review-modal__eyebrow">
+            <i class="material-icons" aria-hidden="true">auto_awesome</i>
+            <span>AVALIANDO SISTEMA</span>
+          </span>
+          <h2 id="modal-review-system-title" class="inessa-review-modal__title">Ordem Paranormal</h2>
+          <p id="modal-review-system-meta" class="inessa-review-modal__meta">Jambô Editora • 2022 • d20</p>
+
+          <div id="modal-system-picker-wrap" style="display: none; margin-top: 0.5rem;">
+            <label for="avaliacao-sistema-select" class="sr-only">Escolha o sistema para avaliar</label>
+            <select id="avaliacao-sistema-select" class="browser-default" style="height: 2.25rem; border-radius: var(--radius-md); border: 1px solid var(--color-bg-chip); background: var(--color-bg-card); padding: 0 0.5rem; font-family: var(--font-heading); font-size: 0.8125rem; font-weight: 600; color: var(--color-text-primary); width: 100%; max-width: 20rem;">
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="inessa-review-modal__close modal-close" aria-label="Fechar formulário de avaliação" title="Fechar">
+        <i class="material-icons" aria-hidden="true">close</i>
+      </button>
+    </header>
+
+    <!-- Formulário de Avaliação -->
+    <form id="form-avaliacao" novalidate>
+      <div class="inessa-review-modal__body">
+
+        <!-- Alerta de Feedback (Erro ou Sucesso) -->
+        <div id="avaliacao-feedback-banner" class="auth-alert" role="alert">
+          <i id="avaliacao-feedback-icon" class="material-icons" aria-hidden="true">info</i>
+          <span id="avaliacao-feedback-text"></span>
+        </div>
+
+        <!-- SEÇÃO 1: CLASSIFICAÇÃO GERAL EM ESTRELAS (1 a 5) -->
+        <section class="review-stars-section" aria-labelledby="label-nota-estrelas">
+          <div>
+            <div class="review-field-label-row">
+              <label id="label-nota-estrelas" class="review-field-label" for="avaliacao-nota">
+                Sua Nota Geral *
+              </label>
+              <span class="review-field-badge">Obrigatório</span>
+            </div>
+
+            <div id="review-stars-group" class="review-stars-interactive" role="radiogroup" aria-label="Classificação de 1 a 5 estrelas">
+              <button type="button" class="review-star-btn js-star-btn" data-star="1" aria-label="1 estrela">
+                <i class="material-icons" aria-hidden="true">star</i>
+              </button>
+              <button type="button" class="review-star-btn js-star-btn" data-star="2" aria-label="2 estrelas">
+                <i class="material-icons" aria-hidden="true">star</i>
+              </button>
+              <button type="button" class="review-star-btn js-star-btn" data-star="3" aria-label="3 estrelas">
+                <i class="material-icons" aria-hidden="true">star</i>
+              </button>
+              <button type="button" class="review-star-btn js-star-btn" data-star="4" aria-label="4 estrelas">
+                <i class="material-icons" aria-hidden="true">star</i>
+              </button>
+              <button type="button" class="review-star-btn js-star-btn" data-star="5" aria-label="5 estrelas">
+                <i class="material-icons" aria-hidden="true">star</i>
+              </button>
+            </div>
+
+            <input type="number" id="avaliacao-nota" name="nota" min="1" max="5" required class="sr-only" tabindex="-1">
+          </div>
+
+          <div class="review-stars-summary">
+            <div>
+              <span id="review-score-numeric" class="review-stars-summary__score">0.0</span>
+              <span class="review-stars-summary__max">/ 5.0</span>
+            </div>
+            <p id="review-score-desc" class="review-stars-summary__desc">
+              <i class="material-icons" style="font-size: 0.95rem; color: var(--color-accent);" aria-hidden="true">stars</i>
+              <span>Toque nas estrelas (1 a 5) para classificar este sistema</span>
+            </p>
+          </div>
+        </section>
+
+        <!-- SEÇÃO 2: PAPEL NA MESA (RADIO) & STATUS DA EXPERIÊNCIA (SELECT) (ID 13) -->
+        <div class="review-role-status-grid">
+
+          <div>
+            <div class="review-field-label-row">
+              <span class="review-field-label">Joguei como: *</span>
+              <span style="font-family: var(--font-heading); font-size: 0.6875rem; color: var(--color-text-muted);">Papel principal</span>
+            </div>
+
+            <div class="review-role-cards" role="radiogroup" aria-label="Papel na mesa">
+              <label class="review-role-card is-selected" id="card-papel-jogador">
+                <input type="radio" name="papel" value="JOGADOR" checked required>
+                <i class="material-icons" aria-hidden="true">person</i>
+                <span class="review-role-card__title">Jogador(a)</span>
+              </label>
+
+              <label class="review-role-card" id="card-papel-mestre">
+                <input type="radio" name="papel" value="MESTRE" required>
+                <i class="material-icons" aria-hidden="true">shield</i>
+                <span class="review-role-card__title">Mestre</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <div class="review-field-label-row">
+              <label class="review-field-label" for="avaliacao-status">Status da sua experiência: *</label>
+            </div>
+
+            <div class="review-select-wrap">
+              <select id="avaliacao-status" name="statusConsumo" class="browser-default" required>
+                <option value="JOGOU" selected>Já joguei (campanha ou one-shot)</option>
+                <option value="JOGANDO">Jogando atualmente (mesa ativa)</option>
+                <option value="QUERO_JOGAR">Quero jogar (Lista de Desejos)</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SEÇÃO 3: TEXTAREA DE RESENHA COM BARRA DE FORMATAÇÃO (ID 11) -->
+        <div>
+          <div class="review-field-label-row">
+            <label class="review-field-label" for="avaliacao-texto">
+              Sua Resenha / Crônica da Mesa
+            </label>
+            <span class="review-field-badge review-field-badge--optional">
+              Opcional (mín. 20 caracteres se preenchido)
+            </span>
+          </div>
+
+          <div class="review-textarea-card">
+            <div class="review-toolbar" role="toolbar" aria-label="Formatação rápida do texto">
+              <button type="button" class="review-toolbar__btn js-format-btn" data-format="bold" title="Negrito">
+                <i class="material-icons" aria-hidden="true">format_bold</i>
+              </button>
+              <button type="button" class="review-toolbar__btn js-format-btn" data-format="italic" title="Itálico">
+                <i class="material-icons" aria-hidden="true">format_italic</i>
+              </button>
+              <button type="button" class="review-toolbar__btn js-format-btn" data-format="quote" title="Destaque / Citação">
+                <i class="material-icons" aria-hidden="true">format_quote</i>
+              </button>
+              <span class="review-toolbar__divider" aria-hidden="true"></span>
+              <span class="review-toolbar__hint">Dica: avalie mecânicas, ambientação e curva de aprendizado</span>
+            </div>
+
+            <textarea
+              id="avaliacao-texto"
+              name="texto"
+              class="review-textarea-input"
+              maxlength="1000"
+              placeholder="Compartilhe como foi narrar ou jogar: o que achou das regras, letalidade do combate, fluidez investigativa e qualidade do material gráfico? Dê dicas para futuros mestres..."
+            ></textarea>
+
+            <div class="review-textarea-footer">
+              <span id="avaliacao-texto-helper" class="auth-field-helper">
+                Deixe em branco para avaliar apenas com estrelas ou escreva no mínimo 20 caracteres.
+              </span>
+              <span id="avaliacao-char-counter" style="font-weight: 700; flex-shrink: 0;">0 / 1000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEÇÃO 4: CHECKBOX DE SPOILERS (ID 13) -->
+        <label class="review-spoiler-box" for="avaliacao-spoiler">
+          <input type="checkbox" id="avaliacao-spoiler" name="spoiler" value="SIM">
+          <span>
+            <span class="review-spoiler-box__title">Esta resenha contém spoilers de aventuras oficiais</span>
+            <span class="review-spoiler-box__desc">
+              Marque caso seu texto revele segredos de tramas prontas, reviravoltas ou mistérios importantes do cenário.
+            </span>
+          </span>
+        </label>
+
+        <!-- SEÇÃO 5: DIRETRIZ DA GUILDA & AVISO DE MODERAÇÃO PRÉVIA (RN01) -->
+        <div class="review-guild-guideline">
+          <span class="review-guild-guideline__icon" aria-hidden="true">
+            <i class="material-icons" style="font-size: 1.15rem;">verified_user</i>
+          </span>
+          <div>
+            <h3 class="review-guild-guideline__title">Diretrizes da Guilda &amp; Moderação Prévia</h3>
+            <p class="review-guild-guideline__desc">
+              Toda avaliação nasce com status <strong>PENDENTE</strong>. Ela é salva imediatamente na sua vitrine pessoal e passa a integrar a nota média pública do sistema assim que aprovada pelo Administrador.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RODAPÉ DE AÇÕES DO MODAL -->
+      <footer class="inessa-review-modal__footer">
+        <button type="button" class="btn-inessa btn-inessa--ghost modal-close">
+          Cancelar
+        </button>
+        <button type="submit" id="btn-submit-avaliacao" class="btn-inessa btn-inessa--primary" style="padding: 0.7rem 1.35rem;">
+          <i class="material-icons" style="font-size: 1.1rem; color: var(--color-accent);" aria-hidden="true">send</i>
+          <span>Publicar Avaliação</span>
+        </button>
+      </footer>
+    </form>
+  </div>
+
+  <!-- Dependências JS via CDN: jQuery + MaterializeCSS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Scripts modulares da aplicação (ID 18) -->
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/sistema.js"></script>
+  <script src="../js/avaliacao.js"></script>
+</body>
+</html>

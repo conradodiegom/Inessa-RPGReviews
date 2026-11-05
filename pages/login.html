@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar ou Criar Conta — Inessa RPG Reviews</title>
+
+  <!-- Google Fonts extraídas do Figma: Roboto Flex e Open Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700;8..144,800&display=swap" rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- MaterializeCSS via CDN (ID 02 e ID 04) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- Estilos Globais e Design System -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- =====================================================================
+       HEADER / NAVBAR GLOBAL (Idêntico em todas as páginas)
+       ===================================================================== -->
+  <header class="inessa-header">
+    <div class="inessa-container inessa-header__inner">
+
+      <div style="display: flex; align-items: center; gap: 0.75rem; height: 100%;">
+        <a href="../index.html" class="inessa-icon-btn" title="Voltar ao Catálogo" aria-label="Voltar ao Catálogo">
+          <i class="material-icons">arrow_back</i>
+        </a>
+
+        <a href="../index.html" class="inessa-brand" aria-label="Inessa RPG Reviews - Início">
+          <span class="inessa-brand__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="inessa-brand__text">
+            <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+            <span class="inessa-brand__subtitle">ACESSO À TAVERNA</span>
+          </span>
+        </a>
+
+        <ul class="inessa-nav-links" style="margin-left: 0.75rem;">
+          <li class="inessa-nav-links__item">
+            <a href="../index.html" class="inessa-nav-links__link">Catálogo</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="../index.html#mais-avaliados" class="inessa-nav-links__link">Mais Avaliados</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="sugerir.html" class="inessa-nav-links__link">Sugerir Sistema</a>
+          </li>
+          <li class="inessa-nav-links__item nav-admin-only" style="display: none;">
+            <a href="admin.html" class="inessa-nav-links__link">Painel Moderação</a>
+          </li>
+        </ul>
+      </div>
+
+      <form id="header-search-form" class="inessa-header__search" role="search">
+        <i class="material-icons inessa-header__search-icon">search</i>
+        <input
+          type="search"
+          id="header-search-input"
+          class="inessa-header__search-input browser-default"
+          placeholder="Buscar sistemas, suplementos, autores..."
+          aria-label="Buscar sistemas de RPG"
+        >
+      </form>
+
+      <div class="inessa-header__actions">
+        <div class="inessa-header__desktop-actions">
+          <div id="nav-guest-actions" style="display: flex; align-items: center; gap: 0.5rem;">
+            <a href="login.html" class="btn-inessa btn-inessa--ghost">Entrar</a>
+            <a href="login.html#cadastro" class="btn-inessa btn-inessa--primary">Criar Conta</a>
+          </div>
+
+          <div id="nav-user-actions" style="display: none; align-items: center; gap: 0.5rem;">
+            <a href="perfil.html" class="btn-inessa btn-inessa--ghost">
+              <span id="nav-user-name">Perfil</span>
+            </a>
+            <button type="button" id="btn-logout" class="btn-inessa btn-inessa--ghost">
+              Sair
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       CONTEÚDO PRINCIPAL — CADASTRO E LOGIN (Etapa 4 — Frame 1:758)
+       ===================================================================== -->
+  <main id="conteudo-principal">
+    <div id="auth-page-container" class="inessa-container">
+      <div class="auth-page-wrap">
+
+        <!-- 1. Banner Superior Místico (#4e0078 conforme Figma) -->
+        <section class="auth-mystic-banner" aria-label="Apresentação do Grimório da Comunidade">
+          <svg class="auth-mystic-banner__hex" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="50,3 95,27 95,73 50,97 5,73 5,27" fill="#FEB300" />
+          </svg>
+
+          <div class="auth-mystic-banner__top">
+            <div class="auth-mystic-banner__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#281900" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#281900" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <p class="auth-mystic-banner__eyebrow">INESSA RPG REVIEWS</p>
+              <p class="auth-mystic-banner__subtitle">Grimório da Comunidade</p>
+            </div>
+          </div>
+
+          <p class="auth-mystic-banner__desc">
+            Conecte-se para registrar campanhas, forjar resenhas e classificar os melhores sistemas de RPG de mesa do Brasil.
+          </p>
+        </section>
+
+        <!-- 2. Seletor Segmentado de Abas (Entrar vs Criar Conta) -->
+        <div class="auth-segmented-tabs" role="tablist" aria-label="Alternar entre Entrar e Criar Conta">
+          <button
+            type="button"
+            class="auth-segmented-tabs__btn js-auth-tab active"
+            data-tab="login"
+            role="tab"
+            aria-selected="true"
+          >
+            <i class="material-icons" aria-hidden="true">verified_user</i>
+            <span>Entrar</span>
+          </button>
+          <button
+            type="button"
+            class="auth-segmented-tabs__btn js-auth-tab"
+            data-tab="cadastro"
+            role="tab"
+            aria-selected="false"
+          >
+            <i class="material-icons" aria-hidden="true">menu_book</i>
+            <span>Criar Conta</span>
+          </button>
+        </div>
+
+        <!-- Feedback Global de Sucesso ou Erro -->
+        <div
+          id="auth-global-feedback"
+          style="display: none; padding: 0.75rem 1rem; border-radius: var(--radius-md); font-size: 0.8125rem;"
+          role="alert"
+        ></div>
+
+        <!-- ===============================================================
+             VIEW 1: CARD DE LOGIN (Frame 1:814)
+             =============================================================== -->
+        <section id="view-login" class="auth-card" aria-labelledby="login-heading">
+          <div>
+            <span class="auth-card__badge">
+              <i class="material-icons" aria-hidden="true">vpn_key</i>
+              <span>ACESSO SEGURO</span>
+            </span>
+            <h1 id="login-heading" class="auth-card__title">Bem-vindo de volta, aventureiro!</h1>
+            <p class="auth-card__desc">
+              Acesse sua estante de sistemas e compartilhe suas opiniões.
+            </p>
+          </div>
+
+          <form id="form-login" novalidate>
+            <div style="display: flex; flex-direction: column; gap: 0.875rem;">
+
+              <!-- Campo 1: E-mail (com validação HTML5 + REGEX - IDs 11 e 12) -->
+              <div class="auth-field-group">
+                <div class="auth-input-box">
+                  <i class="material-icons auth-input-box__icon" aria-hidden="true">mail_outline</i>
+                  <div class="auth-input-box__content">
+                    <label for="login-email" class="auth-input-box__label">E-mail ou Nickname</label>
+                    <input
+                      type="email"
+                      id="login-email"
+                      name="email"
+                      class="auth-input-box__input browser-default"
+                      placeholder="ana@email.com"
+                      required
+                      maxlength="80"
+                      data-validate="email"
+                    >
+                  </div>
+                  <i class="material-icons" style="font-size: 1.1rem; color: var(--color-accent);" aria-hidden="true">verified_user</i>
+                </div>
+                <p class="auth-field-helper">
+                  Insira seu e-mail cadastrado ou identificador de aventureiro.
+                </p>
+              </div>
+
+              <!-- Campo 2: Senha de Acesso (com validação HTML5 + REGEX - IDs 11 e 12) -->
+              <div class="auth-field-group">
+                <div class="auth-input-box">
+                  <i class="material-icons auth-input-box__icon" aria-hidden="true">lock_outline</i>
+                  <div class="auth-input-box__content">
+                    <label for="login-password" class="auth-input-box__label">Senha de Acesso</label>
+                    <input
+                      type="password"
+                      id="login-password"
+                      name="senha"
+                      class="auth-input-box__input browser-default"
+                      placeholder="••••••••••••"
+                      required
+                      minlength="6"
+                      maxlength="40"
+                      data-validate="senha"
+                    >
+                  </div>
+                  <button
+                    type="button"
+                    class="auth-input-box__suffix js-toggle-password"
+                    aria-label="Mostrar ou ocultar senha"
+                    title="Mostrar/ocultar senha"
+                  >
+                    <i class="material-icons" style="font-size: 1.2rem;">visibility</i>
+                  </button>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <p class="auth-field-helper">Mínimo de 6 caracteres sem espaços.</p>
+                  <a href="#recuperar" onclick="M.toast({html: 'Use um dos acessos rápidos abaixo para testar!'}); return false;" style="font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 600; color: var(--color-primary); text-decoration: none;">
+                    Esqueceu sua senha?
+                  </a>
+                </div>
+              </div>
+
+              <!-- Seletor de Perfil Preferencial (Mestre vs Jogador - Frame 1:827) -->
+              <div class="auth-role-strip">
+                <span class="auth-role-strip__label">Perfil preferencial:</span>
+                <input type="hidden" id="login-preferred-role" value="MESTRE">
+                <div class="auth-role-strip__pills">
+                  <button type="button" class="auth-role-pill js-role-pill active" data-role="MESTRE">Mestre</button>
+                  <button type="button" class="auth-role-pill js-role-pill" data-role="JOGADOR">Jogador</button>
+                </div>
+              </div>
+
+              <!-- Botão Submeter Login -->
+              <button type="submit" class="btn-auth-submit">
+                <i class="material-icons" aria-hidden="true">sports_esports</i>
+                <span>ENTRAR NA TAVERNA</span>
+              </button>
+
+            </div>
+          </form>
+
+          <!-- Divisor "OU CONTINUE COM" + Botões do Figma -->
+          <div class="auth-divider">
+            <div class="auth-divider__line"></div>
+            <span class="auth-divider__text">OU CONTINUE COM</span>
+            <div class="auth-divider__line"></div>
+          </div>
+
+          <div class="auth-social-row">
+            <button
+              type="button"
+              class="btn-social-auth js-quick-fill"
+              data-email="ana@email.com"
+              data-senha="senha_super_segura"
+              title="Preencher login de Ana Mestra (Usuária)"
+            >
+              <i class="material-icons" style="font-size: 1.1rem; color: var(--color-primary);">person</i>
+              <span>Google (Ana Mestra)</span>
+            </button>
+            <button
+              type="button"
+              class="btn-social-auth js-quick-fill"
+              data-email="admin@inessarpgreviews.com"
+              data-senha="senha_super_segura"
+              title="Preencher login do Administrador"
+            >
+              <i class="material-icons" style="font-size: 1.1rem; color: var(--color-primary-deep);">admin_panel_settings</i>
+              <span>Discord RPG (Admin)</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             VIEW 2: CARD DE CADASTRO (US01 - Criar Conta com POST /usuarios)
+             Inclui inputs com HTML5 + REGEX, radio buttons e checkbox (IDs 11, 12 e 13)
+             =============================================================== -->
+        <section id="view-register" class="auth-card" style="display: none;" aria-labelledby="register-heading">
+          <div>
+            <span class="auth-card__badge">
+              <i class="material-icons" aria-hidden="true">auto_stories</i>
+              <span>NOVO REGISTRO</span>
+            </span>
+            <h2 id="register-heading" class="auth-card__title">Forje sua Ficha de Aventureiro</h2>
+            <p class="auth-card__desc">
+              Crie sua conta gratuita para avaliar sistemas de RPG, montar sua vitrine e sugerir novos títulos.
+            </p>
+          </div>
+
+          <form id="form-register" novalidate>
+            <div style="display: flex; flex-direction: column; gap: 0.875rem;">
+
+              <!-- Nome do Usuário -->
+              <div class="auth-field-group">
+                <div class="auth-input-box">
+                  <i class="material-icons auth-input-box__icon" aria-hidden="true">badge</i>
+                  <div class="auth-input-box__content">
+                    <label for="register-name" class="auth-input-box__label">Nome ou Título na Mesa *</label>
+                    <input
+                      type="text"
+                      id="register-name"
+                      name="nome"
+                      class="auth-input-box__input browser-default"
+                      placeholder="Ex: Conrado, o Arquimago"
+                      required
+                      minlength="3"
+                      maxlength="60"
+                      data-validate="nome"
+                    >
+                  </div>
+                </div>
+                <p class="auth-field-helper">Mínimo de 3 caracteres alfabéticos.</p>
+              </div>
+
+              <!-- E-mail -->
+              <div class="auth-field-group">
+                <div class="auth-input-box">
+                  <i class="material-icons auth-input-box__icon" aria-hidden="true">mail_outline</i>
+                  <div class="auth-input-box__content">
+                    <label for="register-email" class="auth-input-box__label">E-mail de Acesso *</label>
+                    <input
+                      type="email"
+                      id="register-email"
+                      name="email"
+                      class="auth-input-box__input browser-default"
+                      placeholder="aventureiro@caverna.br"
+                      required
+                      maxlength="80"
+                      data-validate="email"
+                    >
+                  </div>
+                </div>
+                <p class="auth-field-helper">Usado para login (validado por REGEX).</p>
+              </div>
+
+              <!-- Senha -->
+              <div class="auth-field-group">
+                <div class="auth-input-box">
+                  <i class="material-icons auth-input-box__icon" aria-hidden="true">lock_outline</i>
+                  <div class="auth-input-box__content">
+                    <label for="register-password" class="auth-input-box__label">Senha Secreta *</label>
+                    <input
+                      type="password"
+                      id="register-password"
+                      name="senha"
+                      class="auth-input-box__input browser-default"
+                      placeholder="Mínimo de 6 caracteres"
+                      required
+                      minlength="6"
+                      maxlength="40"
+                      data-validate="senha"
+                    >
+                  </div>
+                  <button
+                    type="button"
+                    class="auth-input-box__suffix js-toggle-password"
+                    aria-label="Mostrar ou ocultar senha"
+                  >
+                    <i class="material-icons" style="font-size: 1.2rem;">visibility</i>
+                  </button>
+                </div>
+                <p class="auth-field-helper">Mínimo de 6 caracteres, sem espaços em branco.</p>
+              </div>
+
+              <!-- Radio Buttons: Papel Principal na Mesa (ID 13) -->
+              <div class="auth-role-strip" style="flex-wrap: wrap;">
+                <span class="auth-role-strip__label">Papel principal nas mesas:</span>
+                <div style="display: flex; gap: 1rem;">
+                  <label style="color: var(--color-text-primary); display: inline-flex; align-items: center;">
+                    <input class="with-gap" name="registerRole" type="radio" value="JOGADOR" checked />
+                    <span style="font-size: 0.8125rem; padding-left: 1.65rem;">Jogador(a)</span>
+                  </label>
+                  <label style="color: var(--color-text-primary); display: inline-flex; align-items: center;">
+                    <input class="with-gap" name="registerRole" type="radio" value="MESTRE" />
+                    <span style="font-size: 0.8125rem; padding-left: 1.65rem;">Mestre</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Checkbox: Aceite do Código de Conduta (ID 13) -->
+              <div style="padding: 0.25rem 0.25rem;">
+                <label style="color: var(--color-text-secondary); display: flex; align-items: center;">
+                  <input type="checkbox" id="register-terms" class="filled-in" checked required />
+                  <span style="font-size: 0.8125rem; line-height: 1.35;">
+                    Concordo com as Diretrizes de Avaliação e o Código de Conduta do Aventureiro.
+                  </span>
+                </label>
+              </div>
+
+              <button type="submit" class="btn-auth-submit">
+                <i class="material-icons" aria-hidden="true">person_add</i>
+                <span>CRIAR CONTA NO GRIMÓRIO</span>
+              </button>
+
+            </div>
+          </form>
+        </section>
+
+        <!-- 4. Mini-Cards de Destaque (Context & Delight - Frame 1:775) -->
+        <div class="auth-showcase-row">
+          <div class="auth-showcase-card">
+            <div class="auth-showcase-card__icon" style="background-color: #ffdeac; color: var(--color-accent-dark);">
+              <i class="material-icons" style="font-size: 1.1rem;">star</i>
+            </div>
+            <div>
+              <p class="auth-showcase-card__title">+1.400 Resenhas</p>
+              <p class="auth-showcase-card__sub">Sistemas nacionais</p>
+            </div>
+          </div>
+
+          <div class="auth-showcase-card">
+            <div class="auth-showcase-card__icon" style="background-color: #f4d9ff; color: var(--color-primary-deep);">
+              <i class="material-icons" style="font-size: 1.1rem;">workspace_premium</i>
+            </div>
+            <div>
+              <p class="auth-showcase-card__title">Badges Reais</p>
+              <p class="auth-showcase-card__sub">Mestres verificados</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       RODAPÉ / FOOTER GLOBAL (Mobile + Desktop)
+       ===================================================================== -->
+  <footer class="inessa-footer">
+    <div class="inessa-container">
+
+      <div class="inessa-footer__mobile">
+        <p class="inessa-footer__mobile-copy">
+          Inessa RPG Reviews © 2025 • A comunidade brasileira de sistemas de RPG
+        </p>
+        <nav class="inessa-footer__mobile-links" aria-label="Links do rodapé mobile">
+          <a href="../index.html">Sobre</a>
+          <span class="inessa-footer__dot">•</span>
+          <a href="../index.html">Diretrizes de Avaliação</a>
+          <span class="inessa-footer__dot nav-admin-only" style="display: none;">•</span>
+          <a href="admin.html" class="nav-admin-only" style="display: none;">Painel de Moderação</a>
+        </nav>
+      </div>
+
+      <div class="inessa-footer__desktop">
+        <div class="inessa-footer__grid">
+          <div>
+            <a href="../index.html" class="inessa-brand">
+              <span class="inessa-brand__icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="inessa-brand__text">
+                <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+              </span>
+            </a>
+            <p class="inessa-footer__brand-desc">
+              O grimoire editorial da comunidade brasileira de RPG de mesa. Descubra sistemas,
+              compartilhe crônicas e registre suas experiências como mestre ou jogador.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Explorar</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Catálogo de Sistemas</a></li>
+              <li><a href="../index.html#mais-avaliados">Mais Avaliados da Comunidade</a></li>
+              <li><a href="sugerir.html">Submeter Novo Livro</a></li>
+              <li><a href="../index.html#todos-sistemas">Nova Resenha</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Comunidade &amp; Regras</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Diretrizes Editoriais</a></li>
+              <li><a href="../index.html">Código de Conduta do Aventureiro</a></li>
+              <li><a href="../index.html">Classificação Etária &amp; Gatilhos</a></li>
+              <li><a href="admin.html">Central de Moderação</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Inessa RPG</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Sobre o Projeto</a></li>
+              <li><a href="../index.html">Apoie no Catarse</a></li>
+              <li><a href="https://www.dnd5eapi.co/" target="_blank" rel="noopener noreferrer">API Aberta para Mestres</a></li>
+              <li><a href="../index.html">Contato &amp; Imprensa</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="inessa-footer__bottom-bar">
+          <span>© 2025 Inessa RPG Reviews. Feito para a comunidade de TTRPG brasileira. Todos os direitos reservados.</span>
+          <span class="inessa-footer__version">Versão 2.4.0 Grimório</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       BOTTOM NAVIGATION BAR (Exclusiva Mobile < 992px)
+       ===================================================================== -->
+  <nav class="inessa-bottom-nav" aria-label="Navegação inferior mobile">
+    <a href="../index.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">menu_book</i>
+      <span>Catálogo</span>
+    </a>
+    <a href="../index.html#todos-sistemas" class="inessa-bottom-nav__link">
+      <i class="material-icons">rate_review</i>
+      <span>Avaliar</span>
+    </a>
+    <a href="sugerir.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">add_circle_outline</i>
+      <span>Sugerir</span>
+    </a>
+    <a href="login.html" class="inessa-bottom-nav__link active">
+      <i class="material-icons">account_circle</i>
+      <span>Meu Perfil</span>
+    </a>
+  </nav>
+
+  <!-- Dependências JS via CDN: jQuery + MaterializeCSS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Scripts modulares da aplicação (ID 18) -->
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+</body>
+</html>

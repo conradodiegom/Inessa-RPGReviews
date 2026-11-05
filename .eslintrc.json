@@ -1,0 +1,22 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jquery": true
+  },
+  "globals": {
+    "M": "readonly",
+    "Api": "readonly",
+    "Auth": "readonly"
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    "quotes": ["warn", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+    "semi": ["error", "always"],
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+  }
+}

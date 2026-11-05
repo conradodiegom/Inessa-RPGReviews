@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sugerir Sistema — Inessa RPG Reviews</title>
+
+  <!-- Google Fonts extraídas do Figma: Roboto Flex e Open Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700;8..144,800&display=swap" rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- MaterializeCSS via CDN (ID 02 e ID 04) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- Estilos Globais e Design System -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- =====================================================================
+       HEADER / NAVBAR GLOBAL (Idêntico em todas as páginas)
+       ===================================================================== -->
+  <header class="inessa-header">
+    <div class="inessa-container inessa-header__inner">
+
+      <div style="display: flex; align-items: center; gap: 1.5rem; height: 100%;">
+        <a href="../index.html" class="inessa-brand" aria-label="Inessa RPG Reviews - Início">
+          <span class="inessa-brand__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="inessa-brand__text">
+            <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+            <span class="inessa-brand__subtitle">SUGERIR SISTEMA</span>
+          </span>
+        </a>
+
+        <ul class="inessa-nav-links">
+          <li class="inessa-nav-links__item">
+            <a href="../index.html" class="inessa-nav-links__link">Catálogo</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="../index.html#mais-avaliados" class="inessa-nav-links__link">Mais Avaliados</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="sugerir.html" class="inessa-nav-links__link active">Sugerir Sistema</a>
+          </li>
+          <li class="inessa-nav-links__item nav-admin-only" style="display: none;">
+            <a href="admin.html" class="inessa-nav-links__link">Painel Moderação</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Centro (Desktop): Campo de busca rápida -->
+      <form id="header-search-form" class="inessa-header__search" role="search">
+        <i class="material-icons inessa-header__search-icon">search</i>
+        <input
+          type="search"
+          id="header-search-input"
+          class="inessa-header__search-input browser-default"
+          placeholder="Buscar sistemas, suplementos, autores..."
+          aria-label="Buscar sistemas de RPG"
+        >
+      </form>
+
+      <!-- Direita: Ações Desktop e Mobile -->
+      <div class="inessa-header__actions">
+
+        <div class="inessa-header__desktop-actions">
+          <button type="button" class="btn-inessa btn-inessa--accent js-open-review-modal">
+            Escrever Resenha
+          </button>
+
+          <div id="nav-guest-actions" style="display: flex; align-items: center; gap: 0.5rem;">
+            <a href="login.html" class="btn-inessa btn-inessa--ghost">Entrar</a>
+            <a href="login.html#cadastro" class="btn-inessa btn-inessa--primary">Criar Conta</a>
+          </div>
+
+          <div id="nav-user-actions" style="display: none; align-items: center; gap: 0.5rem;">
+            <a href="perfil.html" class="btn-inessa btn-inessa--ghost">
+              <span id="nav-user-name">Perfil</span>
+            </a>
+            <button type="button" id="btn-logout" class="btn-inessa btn-inessa--ghost">
+              Sair
+            </button>
+          </div>
+
+          <a href="perfil.html" class="inessa-avatar-btn" title="Meu Perfil" aria-label="Meu Perfil">
+            <span class="js-user-initials">
+              <i class="material-icons" style="font-size: 1.1rem;">person_outline</i>
+            </span>
+          </a>
+        </div>
+
+        <div class="inessa-header__mobile-actions">
+          <a href="../index.html" class="inessa-icon-btn" aria-label="Buscar sistemas">
+            <i class="material-icons">search</i>
+          </a>
+          <a href="perfil.html" class="inessa-avatar-btn" aria-label="Meu Perfil">
+            <span class="js-user-initials">
+              <i class="material-icons" style="font-size: 1.1rem;">person_outline</i>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       CONTEÚDO PRINCIPAL — SUGERIR NOVO SISTEMA (Etapa 7A)
+       Reproduz fielmente os Frames 1:1052 (Mobile) e 1:1498 (Desktop)
+       ===================================================================== -->
+  <main id="conteudo-principal">
+
+    <!-- Faixa Superior / Cabeçalho Estrutural (Frame 1:1501) -->
+    <section class="suggest-hero-band" aria-labelledby="titulo-sugerir-sistema">
+      <div class="inessa-container">
+        <div class="suggest-breadcrumb" role="navigation" aria-label="Navegação estrutural">
+          <a href="../index.html">Início</a>
+          <i class="material-icons" style="font-size: 0.9rem;" aria-hidden="true">chevron_right</i>
+          <span>Comunidade</span>
+          <i class="material-icons" style="font-size: 0.9rem;" aria-hidden="true">chevron_right</i>
+          <strong style="color: var(--color-text-primary);">Sugerir Sistema</strong>
+        </div>
+
+        <div class="suggest-hero-band__row">
+          <div>
+            <span class="suggest-hero-band__pill">
+              <i class="material-icons" style="font-size: 0.95rem;" aria-hidden="true">auto_stories</i>
+              <span>CURADORIA COLABORATIVA</span>
+            </span>
+            <h1 id="titulo-sugerir-sistema" class="suggest-hero-band__title">
+              Sugerir Novo Sistema de RPG
+            </h1>
+            <p class="suggest-hero-band__desc">
+              Não encontrou seu RPG de mesa favorito no catálogo? Preencha as informações do tomo para nossa guilda de curadores analisar e catalogar.
+            </p>
+          </div>
+
+          <div class="suggest-tomes-badge">
+            <span class="suggest-tomes-badge__icon" aria-hidden="true">
+              <i class="material-icons">library_books</i>
+            </span>
+            <div>
+              <p style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 800; color: var(--color-text-primary); margin: 0;">
+                342 Tomos
+              </p>
+              <p style="font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 700; color: var(--color-text-secondary); margin: 0;">
+                Homologados pela Guilda
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="inessa-container">
+      <div class="suggest-layout-grid">
+
+        <!-- ===============================================================
+             COLUNA PRINCIPAL (8 Cols): CARD "FICHA TÉCNICA DO SISTEMA"
+             =============================================================== -->
+        <div>
+          <section class="suggest-form-card" aria-labelledby="titulo-ficha-tecnica">
+            <div class="suggest-form-card__top-bar" aria-hidden="true"></div>
+
+            <div class="suggest-form-header">
+              <div>
+                <h2 id="titulo-ficha-tecnica" style="font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                  <i class="material-icons" style="color: var(--color-primary);" aria-hidden="true">menu_book</i>
+                  <span>Ficha Técnica do Sistema</span>
+                </h2>
+                <p style="font-size: 0.8125rem; color: var(--color-text-secondary); margin: 0.125rem 0 0 0;">
+                  Campos com asterisco (<span style="color: var(--color-danger);">*</span>) são indispensáveis para a catalogação oficial.
+                </p>
+              </div>
+              <span class="review-field-badge">Etapa Única</span>
+            </div>
+
+            <!-- Alerta de Feedback (Sucesso ou Erro) -->
+            <div id="sugestao-feedback-banner" class="auth-alert" role="alert">
+              <i id="sugestao-feedback-icon" class="material-icons" aria-hidden="true">info</i>
+              <span id="sugestao-feedback-text"></span>
+            </div>
+
+            <form id="form-sugerir-sistema" class="auth-form" novalidate>
+
+              <!-- Campo 1: Nome do Sistema * -->
+              <div class="auth-field-wrap">
+                <div class="review-field-label-row">
+                  <label class="review-field-label" for="sugestao-nome">
+                    Nome do Sistema <span style="color: var(--color-danger);">*</span>
+                  </label>
+                  <span style="font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 700; color: var(--color-text-muted);">
+                    ex: Skyfall RPG, Mörk Borg, Old Dragon 2e
+                  </span>
+                </div>
+                <div class="auth-input-box" id="box-sugestao-nome">
+                  <i class="material-icons auth-input-box__icon" aria-hidden="true">menu_book</i>
+                  <div class="auth-input-box__inner">
+                    <label for="sugestao-nome" class="auth-input-box__label">Título Oficial do Livro ou Manual</label>
+                    <input
+                      type="text"
+                      id="sugestao-nome"
+                      name="nomeSistema"
+                      class="auth-input-box__input browser-default"
+                      placeholder="Nome oficial da publicação ou manual básico"
+                      required
+                      minlength="2"
+                    >
+                  </div>
+                </div>
+                <p id="helper-sugestao-nome" class="auth-field-helper">
+                  Informe o título completo da edição do sistema.
+                </p>
+              </div>
+
+              <!-- Campo 2: Editora Oficial ou Criador Independente * -->
+              <div class="auth-field-wrap">
+                <div class="review-field-label-row">
+                  <label class="review-field-label" for="sugestao-editora">
+                    Editora Oficial ou Criador Independente <span style="color: var(--color-danger);">*</span>
+                  </label>
+                  <span style="font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 700; color: var(--color-text-muted);">
+                    ex: Jambô Editora, Devir, RetroPunk, Coletivo Indie
+                  </span>
+                </div>
+                <div class="auth-input-box" id="box-sugestao-editora">
+                  <i class="material-icons auth-input-box__icon" aria-hidden="true">business</i>
+                  <div class="auth-input-box__inner">
+                    <label for="sugestao-editora" class="auth-input-box__label">Editora ou Autor Responsável</label>
+                    <input
+                      type="text"
+                      id="sugestao-editora"
+                      name="editora"
+                      class="auth-input-box__input browser-default"
+                      placeholder="Responsável pelos direitos ou publicação editorial"
+                      required
+                      minlength="2"
+                    >
+                  </div>
+                </div>
+                <p id="helper-sugestao-editora" class="auth-field-helper">
+                  Informe a editora nacional, internacional ou autor independente.
+                </p>
+              </div>
+
+              <!-- Campos 3 e 4: Gênero Principal (Select) & Mecânica Principal (Select) (ID 13) -->
+              <div class="suggest-two-col">
+                <div class="auth-field-wrap">
+                  <label class="review-field-label" for="sugestao-genero">
+                    Gênero Principal <span style="color: var(--color-danger);">*</span>
+                  </label>
+                  <div class="review-select-wrap">
+                    <select id="sugestao-genero" name="genero" class="browser-default" required>
+                      <option value="" disabled selected>Selecione a atmosfera...</option>
+                      <option value="Fantasia">Fantasia Medieval / Alta Fantasia</option>
+                      <option value="Terror">Terror &amp; Horror Sobrenatural</option>
+                      <option value="Investigação">Investigação &amp; Mistério Oculto</option>
+                      <option value="Cyberpunk">Cyberpunk &amp; Ficção Científica</option>
+                      <option value="Fantasia Urbana">Fantasia Urbana / Sombria</option>
+                      <option value="Pós-Apocalíptico">Pós-Apocalíptico / Sobrevivência</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="auth-field-wrap">
+                  <label class="review-field-label" for="sugestao-mecanica">
+                    Mecânica Principal / Sistema <span style="color: var(--color-danger);">*</span>
+                  </label>
+                  <div class="review-select-wrap">
+                    <select id="sugestao-mecanica" name="mecanica" class="browser-default" required>
+                      <option value="d20" selected>Sistema d20 (Clássico ou Customizado)</option>
+                      <option value="d100">Sistema Percentual (d100 / BRP)</option>
+                      <option value="Dice Pool">Parada de Dados (Dice Pool / Storyteller)</option>
+                      <option value="PbtA">Powered by the Apocalypse (2d6 / FitD)</option>
+                      <option value="Narrativo">Narrativo / Regras Leves</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Campos 5 e 6: Ano de Lançamento com jQuery Mask Plugin (ID 21) & Origem -->
+              <div class="suggest-two-col">
+                <div class="auth-field-wrap">
+                  <div class="review-field-label-row">
+                    <label class="review-field-label" for="sugestao-ano">
+                      Ano de Lançamento <span style="color: var(--color-danger);">*</span>
+                    </label>
+                    <span class="review-field-badge" title="Formatado automaticamente pelo jQuery Mask Plugin (ID 21)">
+                      Máscara 0000
+                    </span>
+                  </div>
+                  <div class="auth-input-box" id="box-sugestao-ano">
+                    <i class="material-icons auth-input-box__icon" aria-hidden="true">event</i>
+                    <div class="auth-input-box__inner">
+                      <label for="sugestao-ano" class="auth-input-box__label">Ano (4 dígitos)</label>
+                      <input
+                        type="text"
+                        id="sugestao-ano"
+                        name="ano"
+                        class="auth-input-box__input browser-default"
+                        placeholder="ex: 2024"
+                        inputmode="numeric"
+                        maxlength="4"
+                        required
+                      >
+                    </div>
+                  </div>
+                  <p id="helper-sugestao-ano" class="auth-field-helper">
+                    Campo com máscara numérica (<code>jQuery Mask Plugin</code>): digite 4 dígitos entre 1974 e 2026.
+                  </p>
+                </div>
+
+                <div class="auth-field-wrap">
+                  <label class="review-field-label" for="sugestao-origem">
+                    Origem / Idioma da Edição
+                  </label>
+                  <div class="review-select-wrap">
+                    <select id="sugestao-origem" name="origem" class="browser-default">
+                      <option value="BR" selected>Nacional BR (Desenvolvido no Brasil)</option>
+                      <option value="TRADUZIDO">Internacional (Traduzido em PT-BR)</option>
+                      <option value="ORIGINAL">Internacional (Idioma Original)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Campo 7: Link Oficial ou Financiamento (Opcional) -->
+              <div class="auth-field-wrap">
+                <div class="review-field-label-row">
+                  <label class="review-field-label" for="sugestao-link">
+                    Link Oficial, Financiamento ou Loja (Opcional)
+                  </label>
+                  <span style="font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 700; color: var(--color-text-muted);">
+                    Catarse, DriveThruRPG, Editora
+                  </span>
+                </div>
+                <div class="auth-input-box">
+                  <i class="material-icons auth-input-box__icon" aria-hidden="true">link</i>
+                  <div class="auth-input-box__inner">
+                    <label for="sugestao-link" class="auth-input-box__label">URL de Referência</label>
+                    <input
+                      type="url"
+                      id="sugestao-link"
+                      name="linkOficial"
+                      class="auth-input-box__input browser-default"
+                      placeholder="https://..."
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Campo 8: Anotações da Mesa / Comentários Adicionais -->
+              <div class="auth-field-wrap">
+                <div class="review-field-label-row">
+                  <label class="review-field-label" for="sugestao-notas">
+                    Anotações da Mesa &amp; Por que este sistema deve ser catalogado?
+                  </label>
+                  <span class="review-field-badge review-field-badge--optional">Opcional</span>
+                </div>
+                <div class="review-textarea-card">
+                  <textarea
+                    id="sugestao-notas"
+                    name="observacoes"
+                    class="review-textarea-input"
+                    style="min-height: 5.5rem;"
+                    placeholder="Conte para a curadoria o resumo da proposta temática, mecânicas singulares e o impacto deste RPG nas suas sessões..."
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Checkbox de Confirmação Editorial (ID 13) -->
+              <label class="review-spoiler-box" for="sugestao-diretrizes">
+                <input type="checkbox" id="sugestao-diretrizes" name="aceiteDiretrizes" required checked>
+                <span>
+                  <span class="review-spoiler-box__title">
+                    Confirmo que este é um sistema de RPG real e respeito os direitos autorais *
+                  </span>
+                  <span class="review-spoiler-box__desc">
+                    Estou ciente de que a sugestão ficará com status <strong>PENDENTE</strong> até ser avaliada pelos Administradores da Guilda.
+                  </span>
+                </span>
+              </label>
+
+              <!-- Botões de Ação (Frame 1:1653) -->
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; padding-top: 0.5rem;">
+                <button type="reset" id="btn-limpar-sugestao" class="btn-inessa btn-inessa--ghost">
+                  <i class="material-icons" style="font-size: 1rem;" aria-hidden="true">delete_sweep</i>
+                  <span>Limpar Campos</span>
+                </button>
+
+                <button type="submit" id="btn-submit-sugestao" class="btn-inessa btn-inessa--primary" style="padding: 0.75rem 1.75rem;">
+                  <i class="material-icons" style="font-size: 1.1rem; color: var(--color-accent);" aria-hidden="true">send</i>
+                  <span>Submeter Sistema para Curadoria</span>
+                </button>
+              </div>
+
+            </form>
+          </section>
+
+          <!-- Card Compromisso com Autores & Editoras (Frame 1:1663) -->
+          <div class="review-guild-guideline" style="margin-top: 1rem;">
+            <span class="review-guild-guideline__icon" aria-hidden="true">
+              <i class="material-icons">gavel</i>
+            </span>
+            <div>
+              <h3 class="review-guild-guideline__title">Compromisso com Autores &amp; Editoras</h3>
+              <p class="review-guild-guideline__desc">
+                O Inessa RPG Reviews respeita a propriedade intelectual. As páginas de sistema servem como índice catalográfico e polo comunitário de avaliações, nunca hospedando arquivos piratas ou PDFs protegidos.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             COLUNA LATERAL (4 Cols): COMO FUNCIONA A CURADORIA & ÚLTIMAS SUGESTÕES
+             =============================================================== -->
+        <aside style="display: flex; flex-direction: column; gap: 1.25rem;" aria-label="Informações de curadoria">
+
+          <!-- Card 1: Como Funciona a Curadoria (Frame 1:1673) -->
+          <div class="stats-card" style="gap: 1.125rem;">
+            <h3 style="font-size: 1.125rem; display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+              <i class="material-icons" style="color: var(--color-primary);" aria-hidden="true">verified</i>
+              <span>Como Funciona a Curadoria</span>
+            </h3>
+
+            <div class="curation-step">
+              <span class="curation-step__num">1</span>
+              <div>
+                <h4 style="font-size: 0.9375rem; margin: 0 0 0.125rem 0;">Envio Comunitário</h4>
+                <p style="font-size: 0.8125rem; color: var(--color-text-secondary); margin: 0;">
+                  Você submete a ficha técnica com os dados bibliográficos da publicação.
+                </p>
+              </div>
+            </div>
+
+            <div class="curation-step">
+              <span class="curation-step__num">2</span>
+              <div>
+                <h4 style="font-size: 0.9375rem; margin: 0 0 0.125rem 0;">Análise pelo Admin</h4>
+                <p style="font-size: 0.8125rem; color: var(--color-text-secondary); margin: 0;">
+                  Nossa equipe de mestres valida no Painel de Moderação se o sistema possui dados corretos.
+                </p>
+              </div>
+            </div>
+
+            <div class="curation-step">
+              <span class="curation-step__num curation-step__num--gold">3</span>
+              <div>
+                <h4 style="font-size: 0.9375rem; margin: 0 0 0.125rem 0;">Publicação &amp; Créditos</h4>
+                <p style="font-size: 0.8125rem; color: var(--color-text-secondary); margin: 0;">
+                  O RPG ganha página oficial no catálogo aberta para resenhas da comunidade!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Diretrizes de Envio (Frame 1:1705) -->
+          <div class="stats-card" style="background-color: var(--color-bg-surface);">
+            <h3 style="font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+              <i class="material-icons" style="color: var(--color-primary);" aria-hidden="true">fact_check</i>
+              <span>Diretrizes de Envio</span>
+            </h3>
+            <ul style="margin: 0; padding-left: 1.125rem; font-size: 0.8125rem; color: var(--color-text-secondary); display: flex; flex-direction: column; gap: 0.5rem;">
+              <li><strong>Manuais completos:</strong> O livro deve ter regras finalizadas (PDF, físico ou SRD oficial).</li>
+              <li><strong>Priorize títulos acessíveis:</strong> Campanhas de financiamento abertas ou jogos à venda.</li>
+              <li><strong>Sem homebrews rascunhados:</strong> Não aceitamos regras caseiras sem publicação.</li>
+            </ul>
+          </div>
+
+          <!-- Card 3: Últimas Sugestões da Comunidade (Frame 1:1727 / 1:1187) -->
+          <div class="stats-card">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <h3 style="font-size: 1rem; display: flex; align-items: center; gap: 0.375rem; margin: 0;">
+                <i class="material-icons" style="color: var(--color-accent);" aria-hidden="true">history_edu</i>
+                <span>Sugestões Recentes</span>
+              </h3>
+              <span class="catalog-section__counter">Fila da Guilda</span>
+            </div>
+
+            <div id="recent-suggestions-list" style="display: flex; flex-direction: column; gap: 0.625rem;">
+              <!-- Preenchido via js/sugerir.js -->
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       RODAPÉ / FOOTER GLOBAL (Mobile + Desktop)
+       ===================================================================== -->
+  <footer class="inessa-footer">
+    <div class="inessa-container">
+
+      <div class="inessa-footer__mobile">
+        <p class="inessa-footer__mobile-copy">
+          Inessa RPG Reviews © 2025 • A comunidade brasileira de sistemas de RPG
+        </p>
+        <nav class="inessa-footer__mobile-links" aria-label="Links do rodapé mobile">
+          <a href="../index.html">Sobre</a>
+          <span class="inessa-footer__dot">•</span>
+          <a href="../index.html">Diretrizes de Avaliação</a>
+          <span class="inessa-footer__dot nav-admin-only" style="display: none;">•</span>
+          <a href="admin.html" class="nav-admin-only" style="display: none;">Painel de Moderação</a>
+        </nav>
+      </div>
+
+      <div class="inessa-footer__desktop">
+        <div class="inessa-footer__grid">
+          <div>
+            <a href="../index.html" class="inessa-brand">
+              <span class="inessa-brand__icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="inessa-brand__text">
+                <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+              </span>
+            </a>
+            <p class="inessa-footer__brand-desc">
+              O grimoire editorial da comunidade brasileira de RPG de mesa. Descubra sistemas,
+              compartilhe crônicas e registre suas experiências como mestre ou jogador.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Explorar</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Catálogo de Sistemas</a></li>
+              <li><a href="../index.html#mais-avaliados">Mais Avaliados da Comunidade</a></li>
+              <li><a href="sugerir.html">Submeter Novo Livro</a></li>
+              <li><a href="#modal-avaliacao" class="js-open-review-modal">Nova Resenha</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Comunidade &amp; Regras</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Diretrizes Editoriais</a></li>
+              <li><a href="../index.html">Código de Conduta do Aventureiro</a></li>
+              <li><a href="../index.html">Classificação Etária &amp; Gatilhos</a></li>
+              <li><a href="admin.html">Central de Moderação</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Inessa RPG</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Sobre o Projeto</a></li>
+              <li><a href="../index.html">Apoie no Catarse</a></li>
+              <li><a href="https://www.dnd5eapi.co/" target="_blank" rel="noopener noreferrer">API Aberta para Mestres</a></li>
+              <li><a href="../index.html">Contato &amp; Imprensa</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="inessa-footer__bottom-bar">
+          <span>© 2025 Inessa RPG Reviews. Feito para a comunidade de TTRPG brasileira. Todos os direitos reservados.</span>
+          <span class="inessa-footer__version">Versão 2.4.0 Grimório</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       BOTTOM NAVIGATION BAR (Exclusiva Mobile < 992px)
+       ===================================================================== -->
+  <nav class="inessa-bottom-nav" aria-label="Navegação inferior mobile">
+    <a href="../index.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">menu_book</i>
+      <span>Catálogo</span>
+    </a>
+    <a href="#modal-avaliacao" class="inessa-bottom-nav__link js-open-review-modal">
+      <i class="material-icons">rate_review</i>
+      <span>Avaliar</span>
+    </a>
+    <a href="sugerir.html" class="inessa-bottom-nav__link active">
+      <i class="material-icons">add_circle_outline</i>
+      <span>Sugerir</span>
+    </a>
+    <a href="perfil.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">account_circle</i>
+      <span>Meu Perfil</span>
+    </a>
+  </nav>
+
+  <!-- Dependências JS via CDN: jQuery + jQuery Mask Plugin (ID 21) + MaterializeCSS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Scripts modulares da aplicação (ID 18) -->
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/avaliacao.js"></script>
+  <script src="../js/sugerir.js"></script>
+</body>
+</html>

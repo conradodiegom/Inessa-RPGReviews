@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel do Administrador (Moderação) — Inessa RPG Reviews</title>
+
+  <!-- Google Fonts extraídas do Figma: Roboto Flex e Open Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700;8..144,800&display=swap" rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- MaterializeCSS via CDN (ID 02 e ID 04) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- Estilos Globais e Design System -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- =====================================================================
+       HEADER / NAVBAR GLOBAL (Idêntico em todas as páginas)
+       ===================================================================== -->
+  <header class="inessa-header">
+    <div class="inessa-container inessa-header__inner">
+
+      <div style="display: flex; align-items: center; gap: 1.5rem; height: 100%;">
+        <a href="../index.html" class="inessa-brand" aria-label="Inessa RPG Reviews - Início">
+          <span class="inessa-brand__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="inessa-brand__text">
+            <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+            <span class="inessa-brand__subtitle">MODERAÇÃO ADMIN</span>
+          </span>
+        </a>
+
+        <ul class="inessa-nav-links">
+          <li class="inessa-nav-links__item">
+            <a href="../index.html" class="inessa-nav-links__link">Catálogo</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="../index.html#mais-avaliados" class="inessa-nav-links__link">Mais Avaliados</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="sugerir.html" class="inessa-nav-links__link">Sugerir Sistema</a>
+          </li>
+          <li class="inessa-nav-links__item nav-admin-only" style="display: none;">
+            <a href="admin.html" class="inessa-nav-links__link active">Painel Moderação</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Centro (Desktop): Campo de busca rápida -->
+      <form id="header-search-form" class="inessa-header__search" role="search">
+        <i class="material-icons inessa-header__search-icon">search</i>
+        <input
+          type="search"
+          id="header-search-input"
+          class="inessa-header__search-input browser-default"
+          placeholder="Buscar sistemas, suplementos, autores..."
+          aria-label="Buscar sistemas de RPG"
+        >
+      </form>
+
+      <!-- Direita: Ações Desktop e Mobile -->
+      <div class="inessa-header__actions">
+
+        <div class="inessa-header__desktop-actions">
+          <button type="button" class="btn-inessa btn-inessa--accent js-open-review-modal">
+            Escrever Resenha
+          </button>
+
+          <div id="nav-guest-actions" style="display: flex; align-items: center; gap: 0.5rem;">
+            <a href="login.html" class="btn-inessa btn-inessa--ghost">Entrar</a>
+            <a href="login.html#cadastro" class="btn-inessa btn-inessa--primary">Criar Conta</a>
+          </div>
+
+          <div id="nav-user-actions" style="display: none; align-items: center; gap: 0.5rem;">
+            <a href="perfil.html" class="btn-inessa btn-inessa--ghost">
+              <span id="nav-user-name">Perfil</span>
+            </a>
+            <button type="button" id="btn-logout" class="btn-inessa btn-inessa--ghost">
+              Sair
+            </button>
+          </div>
+
+          <a href="perfil.html" class="inessa-avatar-btn" title="Meu Perfil" aria-label="Meu Perfil">
+            <span class="js-user-initials">
+              <i class="material-icons" style="font-size: 1.1rem;">person_outline</i>
+            </span>
+          </a>
+        </div>
+
+        <div class="inessa-header__mobile-actions">
+          <a href="../index.html" class="inessa-icon-btn" aria-label="Buscar sistemas">
+            <i class="material-icons">search</i>
+          </a>
+          <a href="perfil.html" class="inessa-avatar-btn" aria-label="Meu Perfil">
+            <span class="js-user-initials">
+              <i class="material-icons" style="font-size: 1.1rem;">person_outline</i>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       CONTEÚDO PRINCIPAL — PAINEL DO ADMINISTRADOR (Etapa 7B)
+       Reproduz fielmente os Frames 1:1272 (Mobile) e 1:2165 (Desktop)
+       ===================================================================== -->
+  <main id="conteudo-principal">
+    <div class="inessa-container admin-page-wrap">
+
+      <!-- =================================================================
+           BLOQUEIO DE SEGURANÇA (RN02): Exibido se usuario.tipo !== "ADMIN"
+           ================================================================= -->
+      <section
+        id="admin-access-denied"
+        class="suggest-form-card"
+        style="display: none; text-align: center; padding: 3rem 1.5rem; max-width: 38rem; margin: 1.5rem auto;"
+        aria-labelledby="titulo-acesso-restrito"
+      >
+        <div class="suggest-form-card__top-bar" aria-hidden="true"></div>
+        <div style="width: 4rem; height: 4rem; border-radius: 50%; background: var(--color-danger-bg); color: var(--color-danger); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+          <i class="material-icons" style="font-size: 2rem;" aria-hidden="true">gpp_bad</i>
+        </div>
+        <h1 id="titulo-acesso-restrito" style="font-size: 1.5rem; margin-bottom: 0.5rem;">
+          Acesso Restrito ao Administrador
+        </h1>
+        <p style="font-size: 0.9375rem; color: var(--color-text-secondary); margin: 0 auto 1.5rem auto; max-width: 30rem;">
+          Segundo a regra de negócio <strong>RN02</strong>, o Painel de Moderação só pode ser acessado por contas com perfil <code>"tipo": "ADMIN"</code> salvas na sessão do <code>localStorage</code>.
+        </p>
+        <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.75rem;">
+          <a href="login.html" class="btn-inessa btn-inessa--ghost" style="background: var(--color-bg-surface);">
+            Ir para Tela de Login
+          </a>
+          <button type="button" id="btn-quick-admin-login" class="btn-inessa btn-inessa--primary">
+            <i class="material-icons" style="font-size: 1.1rem; color: var(--color-accent);" aria-hidden="true">admin_panel_settings</i>
+            <span>Entrar como Admin (admin@inessarpgreviews.com)</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           PAINEL DE MODERAÇÃO (Visível apenas para tipo === "ADMIN")
+           ================================================================= -->
+      <div id="admin-dashboard-content" style="display: none; flex-direction: column; gap: 1.5rem;">
+
+        <!-- Top Administrative Header (Frame 1:2168) -->
+        <section class="admin-top-header" aria-labelledby="titulo-painel-admin">
+          <div>
+            <span class="suggest-hero-band__pill">
+              <i class="material-icons" style="font-size: 0.95rem;" aria-hidden="true">admin_panel_settings</i>
+              <span>CENTRAL DE GOVERNANÇA &amp; MODERAÇÃO DA GUILDA</span>
+            </span>
+            <h1 id="titulo-painel-admin" class="suggest-hero-band__title">
+              Painel do Administrador
+            </h1>
+            <p class="suggest-hero-band__desc">
+              Aprove ou rejeite avaliações pendentes (recalculando a nota média automaticamente via <code>PATCH</code>) e gerencie sugestões de novos sistemas.
+            </p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <span class="admin-session-pill">
+              <span class="admin-session-pill__dot" aria-hidden="true"></span>
+              <span id="admin-active-name">Sessão Admin Ativa</span>
+            </span>
+            <button type="button" id="btn-refresh-admin" class="btn-inessa btn-inessa--ghost" style="background: var(--color-bg-surface);">
+              <i class="material-icons" style="font-size: 1rem;" aria-hidden="true">refresh</i>
+              <span>Atualizar Fila</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- 4 Metric Cards (Frame 1:2192) -->
+        <section class="admin-metrics-grid" aria-label="Métricas de moderação">
+          <div class="admin-metric-card">
+            <div class="admin-metric-card__top">
+              <span>Reviews Pendentes</span>
+              <i class="material-icons" style="color: var(--color-accent);" aria-hidden="true">rate_review</i>
+            </div>
+            <p id="metric-pending-reviews" class="admin-metric-card__value">0</p>
+            <p class="admin-metric-card__sub">Aguardando curadoria</p>
+          </div>
+
+          <div class="admin-metric-card">
+            <div class="admin-metric-card__top">
+              <span>Sugestões de RPG</span>
+              <i class="material-icons" style="color: var(--color-primary);" aria-hidden="true">library_add</i>
+            </div>
+            <p id="metric-pending-suggestions" class="admin-metric-card__value">0</p>
+            <p class="admin-metric-card__sub">Novos tomos sugeridos</p>
+          </div>
+
+          <div class="admin-metric-card">
+            <div class="admin-metric-card__top">
+              <span>Sistemas no Catálogo</span>
+              <i class="material-icons" style="color: var(--color-teal);" aria-hidden="true">menu_book</i>
+            </div>
+            <p id="metric-total-systems" class="admin-metric-card__value">0</p>
+            <p class="admin-metric-card__sub">Publicados oficialmente</p>
+          </div>
+
+          <div class="admin-metric-card">
+            <div class="admin-metric-card__top">
+              <span>Reviews Aprovadas</span>
+              <i class="material-icons" style="color: var(--color-success);" aria-hidden="true">verified</i>
+            </div>
+            <p id="metric-approved-reviews" class="admin-metric-card__value">0</p>
+            <p class="admin-metric-card__sub">Ativas na nota média</p>
+          </div>
+        </section>
+
+        <!-- Abas de Navegação do Painel Admin (Frame 1:2253) -->
+        <div class="profile-tabs-bar">
+          <div class="profile-tabs-list" role="tablist" aria-label="Abas do Painel de Moderação">
+            <button
+              type="button"
+              class="profile-tab-btn js-admin-tab active"
+              role="tab"
+              aria-selected="true"
+              data-tab="REVIEWS"
+            >
+              <i class="material-icons" style="font-size: 1.05rem;" aria-hidden="true">Fact_check</i>
+              <span>Reviews pendentes</span>
+              <span id="tab-count-reviews" class="profile-tab-count">0</span>
+            </button>
+
+            <button
+              type="button"
+              class="profile-tab-btn js-admin-tab"
+              role="tab"
+              aria-selected="false"
+              data-tab="SUGESTOES"
+            >
+              <i class="material-icons" style="font-size: 1.05rem;" aria-hidden="true">auto_stories</i>
+              <span>Sugestões</span>
+              <span id="tab-count-sugestoes" class="profile-tab-count">0</span>
+            </button>
+
+            <button
+              type="button"
+              class="profile-tab-btn js-admin-tab"
+              role="tab"
+              aria-selected="false"
+              data-tab="CADASTRAR"
+            >
+              <i class="material-icons" style="font-size: 1.05rem;" aria-hidden="true">add_box</i>
+              <span>Cadastrar Sistema (US08)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             ABA 1: FILA DE REVIEWS PENDENTES (Frames 1:1276 e 1:2284)
+             =============================================================== -->
+        <section id="admin-view-reviews" aria-label="Moderação de avaliações">
+          <div class="profile-filter-bar" style="margin-bottom: 1rem;">
+            <div id="admin-review-status-chips" class="catalog-chips-row">
+              <button type="button" class="inessa-chip js-admin-review-filter active" data-status="PENDENTE">
+                Pendentes de Aprovação
+              </button>
+              <button type="button" class="inessa-chip js-admin-review-filter" data-status="APROVADA">
+                Aprovadas
+              </button>
+              <button type="button" class="inessa-chip js-admin-review-filter" data-status="REJEITADA">
+                Rejeitadas
+              </button>
+              <button type="button" class="inessa-chip js-admin-review-filter" data-status="TODAS">
+                Todas
+              </button>
+            </div>
+          </div>
+
+          <div id="admin-reviews-list" style="display: flex; flex-direction: column; gap: 1rem;">
+            <!-- Preenchido dinamicamente via js/admin.js -->
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             ABA 2: FILA DE SUGESTÕES DE SISTEMAS (US07)
+             =============================================================== -->
+        <section id="admin-view-sugestoes" style="display: none;" aria-label="Moderação de sugestões de sistemas">
+          <div class="profile-filter-bar" style="margin-bottom: 1rem;">
+            <div id="admin-sugestao-status-chips" class="catalog-chips-row">
+              <button type="button" class="inessa-chip js-admin-sugestao-filter active" data-status="PENDENTE">
+                Sugestões Pendentes
+              </button>
+              <button type="button" class="inessa-chip js-admin-sugestao-filter" data-status="APROVADA">
+                Aprovadas
+              </button>
+              <button type="button" class="inessa-chip js-admin-sugestao-filter" data-status="REJEITADA">
+                Rejeitadas
+              </button>
+              <button type="button" class="inessa-chip js-admin-sugestao-filter" data-status="TODAS">
+                Todas
+              </button>
+            </div>
+          </div>
+
+          <div id="admin-sugestoes-list" style="display: flex; flex-direction: column; gap: 1rem;">
+            <!-- Preenchido dinamicamente via js/admin.js -->
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             ABA 3: CADASTRAR NOVO SISTEMA MANUALMENTE (US08)
+             =============================================================== -->
+        <section id="admin-view-cadastrar" style="display: none;" aria-labelledby="titulo-admin-novo-sistema">
+          <div class="suggest-form-card" style="max-width: 46rem;">
+            <div class="suggest-form-card__top-bar" aria-hidden="true"></div>
+            <h2 id="titulo-admin-novo-sistema" style="font-size: 1.25rem; margin-bottom: 0.25rem;">
+              Cadastrar Novo Sistema Oficial no Catálogo (US08)
+            </h2>
+            <p style="font-size: 0.8125rem; color: var(--color-text-secondary); margin: 0 0 1.25rem 0;">
+              Adiciona o sistema diretamente em <code>POST /sistemas</code> com nota média inicial <code>0</code>.
+            </p>
+
+            <form id="form-admin-novo-sistema" class="auth-form">
+              <div class="suggest-two-col">
+                <div class="auth-field-wrap">
+                  <label class="review-field-label" for="admin-sys-nome">Nome do Sistema *</label>
+                  <div class="auth-input-box">
+                    <i class="material-icons auth-input-box__icon" aria-hidden="true">menu_book</i>
+                    <div class="auth-input-box__inner">
+                      <label for="admin-sys-nome" class="auth-input-box__label">Título do RPG</label>
+                      <input type="text" id="admin-sys-nome" class="auth-input-box__input browser-default" placeholder="Ex: Skyfall RPG" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="auth-field-wrap">
+                  <label class="review-field-label" for="admin-sys-editora">Editora *</label>
+                  <div class="auth-input-box">
+                    <i class="material-icons auth-input-box__icon" aria-hidden="true">business</i>
+                    <div class="auth-input-box__inner">
+                      <label for="admin-sys-editora" class="auth-input-box__label">Editora Oficial</label>
+                      <input type="text" id="admin-sys-editora" class="auth-input-box__input browser-default" placeholder="Ex: Capitur" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="suggest-two-col">
+                <div class="auth-field-wrap">
+                  <label class="review-field-label" for="admin-sys-genero">Gênero *</label>
+                  <div class="review-select-wrap">
+                    <select id="admin-sys-genero" class="browser-default" required>
+                      <option value="Fantasia" selected>Fantasia</option>
+                      <option value="Terror">Terror</option>
+                      <option value="Investigação">Investigação</option>
+                      <option value="Cyberpunk">Cyberpunk</option>
+                      <option value="Fantasia Urbana">Fantasia Urbana</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="auth-field-wrap">
+                  <label class="review-field-label" for="admin-sys-mecanica">Mecânica *</label>
+                  <div class="review-select-wrap">
+                    <select id="admin-sys-mecanica" class="browser-default" required>
+                      <option value="d20" selected>d20</option>
+                      <option value="d100">d100</option>
+                      <option value="Dice Pool">Dice Pool</option>
+                      <option value="PbtA">PbtA</option>
+                      <option value="Narrativo">Narrativo</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="auth-field-wrap" style="max-width: 16rem;">
+                <label class="review-field-label" for="admin-sys-ano">Ano de Lançamento *</label>
+                <div class="auth-input-box">
+                  <i class="material-icons auth-input-box__icon" aria-hidden="true">event</i>
+                  <div class="auth-input-box__inner">
+                    <label for="admin-sys-ano" class="auth-input-box__label">Ano (4 dígitos)</label>
+                    <input type="number" id="admin-sys-ano" class="auth-input-box__input browser-default" value="2024" min="1970" max="2030" required>
+                  </div>
+                </div>
+              </div>
+
+              <div style="padding-top: 0.5rem;">
+                <button type="submit" class="btn-inessa btn-inessa--primary" style="padding: 0.75rem 1.5rem;">
+                  <i class="material-icons" style="font-size: 1.1rem; color: var(--color-accent);" aria-hidden="true">add_circle</i>
+                  <span>Publicar Sistema no Catálogo</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       RODAPÉ / FOOTER GLOBAL (Mobile + Desktop)
+       ===================================================================== -->
+  <footer class="inessa-footer">
+    <div class="inessa-container">
+
+      <div class="inessa-footer__mobile">
+        <p class="inessa-footer__mobile-copy">
+          Inessa RPG Reviews © 2025 • A comunidade brasileira de sistemas de RPG
+        </p>
+        <nav class="inessa-footer__mobile-links" aria-label="Links do rodapé mobile">
+          <a href="../index.html">Sobre</a>
+          <span class="inessa-footer__dot">•</span>
+          <a href="../index.html">Diretrizes de Avaliação</a>
+          <span class="inessa-footer__dot">•</span>
+          <a href="admin.html">Painel de Moderação</a>
+        </nav>
+      </div>
+
+      <div class="inessa-footer__desktop">
+        <div class="inessa-footer__grid">
+          <div>
+            <a href="../index.html" class="inessa-brand">
+              <span class="inessa-brand__icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="inessa-brand__text">
+                <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+              </span>
+            </a>
+            <p class="inessa-footer__brand-desc">
+              O grimoire editorial da comunidade brasileira de RPG de mesa. Descubra sistemas,
+              compartilhe crônicas e registre suas experiências como mestre ou jogador.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Explorar</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Catálogo de Sistemas</a></li>
+              <li><a href="../index.html#mais-avaliados">Mais Avaliados da Comunidade</a></li>
+              <li><a href="sugerir.html">Submeter Novo Livro</a></li>
+              <li><a href="#modal-avaliacao" class="js-open-review-modal">Nova Resenha</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Comunidade &amp; Regras</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Diretrizes Editoriais</a></li>
+              <li><a href="../index.html">Código de Conduta do Aventureiro</a></li>
+              <li><a href="../index.html">Classificação Etária &amp; Gatilhos</a></li>
+              <li><a href="admin.html">Central de Moderação</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Inessa RPG</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="../index.html">Sobre o Projeto</a></li>
+              <li><a href="../index.html">Apoie no Catarse</a></li>
+              <li><a href="https://www.dnd5eapi.co/" target="_blank" rel="noopener noreferrer">API Aberta para Mestres</a></li>
+              <li><a href="../index.html">Contato &amp; Imprensa</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="inessa-footer__bottom-bar">
+          <span>© 2025 Inessa RPG Reviews. Feito para a comunidade de TTRPG brasileira. Todos os direitos reservados.</span>
+          <span class="inessa-footer__version">Versão 2.4.0 Grimório</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       BOTTOM NAVIGATION BAR (Exclusiva Mobile < 992px)
+       ===================================================================== -->
+  <nav class="inessa-bottom-nav" aria-label="Navegação inferior mobile">
+    <a href="../index.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">menu_book</i>
+      <span>Catálogo</span>
+    </a>
+    <a href="#modal-avaliacao" class="inessa-bottom-nav__link js-open-review-modal">
+      <i class="material-icons">rate_review</i>
+      <span>Avaliar</span>
+    </a>
+    <a href="sugerir.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">add_circle_outline</i>
+      <span>Sugerir</span>
+    </a>
+    <a href="perfil.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">account_circle</i>
+      <span>Meu Perfil</span>
+    </a>
+  </nav>
+
+  <!-- Dependências JS via CDN: jQuery + MaterializeCSS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Scripts modulares da aplicação (ID 18) -->
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/avaliacao.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

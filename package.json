@@ -7,15 +7,23 @@
     "doc": "docs"
   },
   "scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1",
-  "api": "json-server --watch db.json"
+    "api": "json-server --watch db.json --port 3000",
+    "lint": "eslint js/**/*.js",
+    "format": "prettier --write \"js/**/*.js\" \"css/**/*.css\" \"**/*.html\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/conradodiegom/Inessa-RPGReviews.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "rpg",
+    "ttrpg",
+    "reviews",
+    "materializecss",
+    "jquery",
+    "json-server"
+  ],
+  "author": "Conrado",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/conradodiegom/Inessa-RPGReviews/issues"

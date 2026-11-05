@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inessa RPG Reviews — Catálogo de Sistemas</title>
+
+  <!-- Google Fonts extraídas do Figma: Roboto Flex e Open Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700;8..144,800&display=swap" rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- MaterializeCSS via CDN (ID 02 e ID 04) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- Estilos Globais e Design System -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- =====================================================================
+       HEADER / NAVBAR GLOBAL (Mobile + Desktop)
+       Reproduz o topo escuro #1e0731 com borda âmbar #feb300 do Figma
+       ===================================================================== -->
+  <header class="inessa-header">
+    <div class="inessa-container inessa-header__inner">
+
+      <!-- Esquerda: Logo + Links de Navegação Desktop -->
+      <div style="display: flex; align-items: center; gap: 1.5rem; height: 100%;">
+        <a href="index.html" class="inessa-brand" aria-label="Inessa RPG Reviews - Início">
+          <span class="inessa-brand__icon" aria-hidden="true">
+            <!-- Ícone SVG de dado D20 estilizado conforme o Figma -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="inessa-brand__text">
+            <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+            <span class="inessa-brand__subtitle">CATÁLOGO</span>
+          </span>
+        </a>
+
+        <ul class="inessa-nav-links">
+          <li class="inessa-nav-links__item">
+            <a href="index.html" class="inessa-nav-links__link active">Catálogo</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="#mais-avaliados" class="inessa-nav-links__link">Mais Avaliados</a>
+          </li>
+          <li class="inessa-nav-links__item">
+            <a href="pages/sugerir.html" class="inessa-nav-links__link">Sugerir Sistema</a>
+          </li>
+          <li class="inessa-nav-links__item nav-admin-only" style="display: none;">
+            <a href="pages/admin.html" class="inessa-nav-links__link">Painel Moderação</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Centro (Desktop): Campo de busca rápida -->
+      <form id="header-search-form" class="inessa-header__search" role="search">
+        <i class="material-icons inessa-header__search-icon">search</i>
+        <input
+          type="search"
+          id="header-search-input"
+          class="inessa-header__search-input browser-default"
+          placeholder="Buscar sistemas, suplementos, autores..."
+          aria-label="Buscar sistemas de RPG"
+        >
+      </form>
+
+      <!-- Direita: Ações Desktop e Mobile -->
+      <div class="inessa-header__actions">
+
+        <!-- Ações Desktop -->
+        <div class="inessa-header__desktop-actions">
+          <a href="#todos-sistemas" class="btn-inessa btn-inessa--accent">
+            Escrever Resenha
+          </a>
+
+          <!-- Estado Visitante -->
+          <div id="nav-guest-actions" style="display: flex; align-items: center; gap: 0.5rem;">
+            <a href="pages/login.html" class="btn-inessa btn-inessa--ghost">Entrar</a>
+            <a href="pages/login.html#cadastro" class="btn-inessa btn-inessa--primary">Criar Conta</a>
+          </div>
+
+          <!-- Estado Usuário Logado -->
+          <div id="nav-user-actions" style="display: none; align-items: center; gap: 0.5rem;">
+            <a href="pages/perfil.html" class="btn-inessa btn-inessa--ghost" title="Abrir minha vitrine de perfil">
+              <span id="nav-user-name">Perfil</span>
+            </a>
+            <button type="button" id="btn-logout" class="btn-inessa btn-inessa--ghost" title="Encerrar sessão">
+              Sair
+            </button>
+          </div>
+
+          <a href="pages/perfil.html" class="inessa-avatar-btn" title="Meu Perfil" aria-label="Meu Perfil">
+            <span class="js-user-initials">
+              <i class="material-icons" style="font-size: 1.1rem;">person_outline</i>
+            </span>
+          </a>
+        </div>
+
+        <!-- Ações Mobile (< 992px conforme Frame 1:342) -->
+        <div class="inessa-header__mobile-actions">
+          <a href="#busca-catalogo" class="inessa-icon-btn" aria-label="Buscar Sistemas">
+            <i class="material-icons">search</i>
+          </a>
+          <a href="pages/perfil.html" class="inessa-avatar-btn" aria-label="Meu Perfil">
+            <span class="js-user-initials">
+              <i class="material-icons" style="font-size: 1.1rem;">person_outline</i>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       CONTEÚDO PRINCIPAL — CATÁLOGO DE SISTEMAS (Etapa 2)
+       Reproduz fielmente o Frame 1:342 do Figma (Mobile & Desktop)
+       ===================================================================== -->
+  <main id="conteudo-principal">
+
+    <!-- 1. Faixa Superior: Busca + Filtros por Gênero e Mecânica (Chips) -->
+    <section id="busca-catalogo" class="catalog-filter-strip" aria-label="Busca e filtros de sistemas">
+      <div class="inessa-container">
+
+        <!-- Caixa de Busca -->
+        <div class="catalog-search-box">
+          <i class="material-icons catalog-search-box__icon" aria-hidden="true">search</i>
+          <input
+            type="search"
+            id="catalog-search-input"
+            class="catalog-search-box__input browser-default"
+            placeholder="Buscar sistemas por nome, editora ou mecânica..."
+            aria-label="Buscar sistemas por nome, editora ou mecânica"
+          >
+          <button
+            type="button"
+            id="btn-clear-search"
+            class="catalog-search-box__clear"
+            aria-label="Limpar busca"
+            title="Limpar busca"
+          >
+            <i class="material-icons" style="font-size: 1.125rem;">close</i>
+          </button>
+        </div>
+
+        <!-- Linha 1: Filtro por Gênero (Chips) -->
+        <div id="genre-chips-container" class="catalog-chips-row" role="group" aria-label="Filtrar por gênero">
+          <button type="button" class="inessa-chip js-genre-chip active" data-genre="TODOS">Todos</button>
+          <button type="button" class="inessa-chip js-genre-chip" data-genre="Fantasia">Fantasia</button>
+          <button type="button" class="inessa-chip js-genre-chip" data-genre="Terror">Terror</button>
+          <button type="button" class="inessa-chip js-genre-chip" data-genre="Ficção Científica">Ficção Científica</button>
+          <button type="button" class="inessa-chip js-genre-chip" data-genre="Cyberpunk">Cyberpunk</button>
+          <button type="button" class="inessa-chip js-genre-chip" data-genre="Investigação">Investigação</button>
+        </div>
+
+        <!-- Linha 2: Filtro por Mecânica (Chips) -->
+        <div id="mechanic-chips-container" class="catalog-chips-row" role="group" aria-label="Filtrar por mecânica">
+          <span class="catalog-chips-label">MECÂNICA:</span>
+          <button type="button" class="inessa-chip inessa-chip--sm js-mechanic-chip" data-mechanic="d20">d20</button>
+          <button type="button" class="inessa-chip inessa-chip--sm js-mechanic-chip" data-mechanic="PbtA">PbtA</button>
+          <button type="button" class="inessa-chip inessa-chip--sm js-mechanic-chip" data-mechanic="Narrativo">Narrativo</button>
+          <button type="button" class="inessa-chip inessa-chip--sm js-mechanic-chip" data-mechanic="Dice Pool">Dice Pool</button>
+          <button type="button" class="inessa-chip inessa-chip--sm js-mechanic-chip" data-mechanic="d100">d100</button>
+          <button type="button" class="inessa-chip inessa-chip--sm js-mechanic-chip" data-mechanic="2d6">2d6</button>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="inessa-container">
+
+      <!-- Aviso amigável caso a API JSON Server não esteja rodando na porta 3000 -->
+      <div
+        id="catalog-api-warning"
+        style="display: none; margin-top: 1rem; padding: 0.75rem 1rem; border-radius: var(--radius-md); background-color: var(--color-accent-tint); color: var(--color-accent-contrast); font-size: 0.8125rem;"
+        role="status"
+      >
+        <strong>Modo de demonstração:</strong> O servidor JSON Server (<code>npm run api</code> na porta 3000) não foi detectado. Exibindo catálogo local de segurança.
+      </div>
+
+      <!-- 2. Seção: Mais Bem Avaliados (Carrossel / Destaque) -->
+      <section id="mais-avaliados" class="catalog-section" aria-labelledby="titulo-mais-avaliados">
+        <div class="catalog-section__header">
+          <div class="catalog-section__title-wrap">
+            <i class="material-icons catalog-section__icon--star" aria-hidden="true">stars</i>
+            <h2 id="titulo-mais-avaliados" class="catalog-section__title">Mais Bem Avaliados</h2>
+          </div>
+          <a href="#todos-sistemas" class="catalog-section__action">Ver ranking</a>
+        </div>
+
+        <div id="featured-systems-carousel" class="featured-carousel">
+          <!-- Preenchido dinamicamente por js/catalogo.js -->
+        </div>
+      </section>
+
+      <!-- 3. Seção Principal: Todos os Sistemas (Grid 2 colunas mobile / 3 desktop) -->
+      <section id="todos-sistemas" class="catalog-section" aria-labelledby="titulo-todos-sistemas">
+        <div class="catalog-section__header">
+          <div class="catalog-section__title-wrap">
+            <i class="material-icons catalog-section__icon--book" aria-hidden="true">menu_book</i>
+            <h2 id="titulo-todos-sistemas" class="catalog-section__title">Todos os Sistemas</h2>
+          </div>
+          <span id="systems-counter" class="catalog-section__counter">0 exibidos</span>
+        </div>
+
+        <!-- Grid de Cards -->
+        <div id="all-systems-grid" class="systems-grid">
+          <!-- Preenchido dinamicamente por js/catalogo.js -->
+        </div>
+
+        <!-- Estado vazio quando nenhum sistema corresponde aos filtros -->
+        <div
+          id="catalog-empty-state"
+          style="display: none; text-align: center; padding: 2.5rem 1rem; background: var(--color-bg-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-xs);"
+        >
+          <i class="material-icons" style="font-size: 2.5rem; color: var(--color-text-muted);">search_off</i>
+          <h3 style="margin-top: 0.5rem;">Nenhum sistema encontrado</h3>
+          <p style="color: var(--color-text-secondary); font-size: 0.875rem;">
+            Não encontramos sistemas com essa combinação de busca, gênero ou mecânica.
+          </p>
+          <button type="button" id="btn-reset-filters" class="btn-inessa btn-inessa--primary">
+            Limpar Filtros
+          </button>
+        </div>
+
+        <!-- Botão Carregar Mais Sistemas -->
+        <div class="catalog-load-more-wrap">
+          <button type="button" id="btn-load-more-systems" class="btn-load-more">
+            <span>CARREGAR MAIS SISTEMAS</span>
+            <i class="material-icons" aria-hidden="true">expand_more</i>
+          </button>
+        </div>
+      </section>
+
+      <!-- 4. Banner Comunitário: Sugerir Sistema -->
+      <section class="community-prompt-banner" aria-label="Sugerir novo sistema de RPG">
+        <div>
+          <h3 class="community-prompt-banner__title">Não encontrou seu RPG favorito?</h3>
+          <p class="community-prompt-banner__desc">
+            Sugira novos sistemas nacionais ou importados para a comunidade avaliar.
+          </p>
+        </div>
+        <a href="pages/sugerir.html" class="community-prompt-banner__btn">Sugerir</a>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       RODAPÉ / FOOTER GLOBAL (Mobile + Desktop)
+       ===================================================================== -->
+  <footer class="inessa-footer">
+    <div class="inessa-container">
+
+      <!-- Versão Mobile (conforme Frame 1:342) -->
+      <div class="inessa-footer__mobile">
+        <p class="inessa-footer__mobile-copy">
+          Inessa RPG Reviews © 2025 • A comunidade brasileira de sistemas de RPG
+        </p>
+        <nav class="inessa-footer__mobile-links" aria-label="Links do rodapé mobile">
+          <a href="index.html">Sobre</a>
+          <span class="inessa-footer__dot">•</span>
+          <a href="index.html">Diretrizes de Avaliação</a>
+          <span class="inessa-footer__dot nav-admin-only" style="display: none;">•</span>
+          <a href="pages/admin.html" class="nav-admin-only" style="display: none;">Painel de Moderação</a>
+        </nav>
+      </div>
+
+      <!-- Versão Desktop (4 colunas em CSS Grid conforme Frame 1:1498) -->
+      <div class="inessa-footer__desktop">
+        <div class="inessa-footer__grid">
+          <div>
+            <a href="index.html" class="inessa-brand">
+              <span class="inessa-brand__icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="#FEB300" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M12 2V12M12 12L3 7M12 12L21 7M12 12L7.5 19.5M12 12L16.5 19.5" stroke="#FEB300" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="inessa-brand__text">
+                <span class="inessa-brand__title">INESSA <span>RPG</span></span>
+              </span>
+            </a>
+            <p class="inessa-footer__brand-desc">
+              O grimoire editorial da comunidade brasileira de RPG de mesa. Descubra sistemas,
+              compartilhe crônicas e registre suas experiências como mestre ou jogador.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Explorar</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="index.html">Catálogo de Sistemas</a></li>
+              <li><a href="#mais-avaliados">Mais Avaliados da Comunidade</a></li>
+              <li><a href="pages/sugerir.html">Submeter Novo Livro</a></li>
+              <li><a href="#todos-sistemas">Nova Resenha</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Comunidade &amp; Regras</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="index.html">Diretrizes Editoriais</a></li>
+              <li><a href="index.html">Código de Conduta do Aventureiro</a></li>
+              <li><a href="index.html">Classificação Etária &amp; Gatilhos</a></li>
+              <li><a href="pages/admin.html">Central de Moderação</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="inessa-footer__col-title">Inessa RPG</h4>
+            <ul class="inessa-footer__list">
+              <li><a href="index.html">Sobre o Projeto</a></li>
+              <li><a href="index.html">Apoie no Catarse</a></li>
+              <li><a href="https://www.dnd5eapi.co/" target="_blank" rel="noopener noreferrer">API Aberta para Mestres</a></li>
+              <li><a href="index.html">Contato &amp; Imprensa</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="inessa-footer__bottom-bar">
+          <span>© 2025 Inessa RPG Reviews. Feito para a comunidade de TTRPG brasileira. Todos os direitos reservados.</span>
+          <span class="inessa-footer__version">Versão 2.4.0 Grimório</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       BOTTOM NAVIGATION BAR (Exclusiva Mobile < 992px conforme Figma)
+       ===================================================================== -->
+  <nav class="inessa-bottom-nav" aria-label="Navegação inferior mobile">
+    <a href="index.html" class="inessa-bottom-nav__link active">
+      <i class="material-icons">menu_book</i>
+      <span>Catálogo</span>
+    </a>
+    <a href="#modal-avaliacao" class="inessa-bottom-nav__link js-open-review-modal">
+      <i class="material-icons">rate_review</i>
+      <span>Avaliar</span>
+    </a>
+    <a href="pages/sugerir.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">add_circle_outline</i>
+      <span>Sugerir</span>
+    </a>
+    <a href="pages/perfil.html" class="inessa-bottom-nav__link">
+      <i class="material-icons">account_circle</i>
+      <span>Meu Perfil</span>
+    </a>
+  </nav>
+
+  <!-- Dependências JS via CDN: jQuery + MaterializeCSS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Scripts modulares da aplicação (ID 18) -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/catalogo.js"></script>
+  <script src="js/avaliacao.js"></script>
+</body>
+</html>

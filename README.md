@@ -13,17 +13,38 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 - [📄 Product Requirements Document (PRD)](./docs/prd.md) - Visão geral, atores e histórias de usuário.
 - [🛠️ Especificação Técnica (Architecture)](./docs/architecture.md) - Diagrama de banco de dados (DER), dicionário de dados e rotas da API (JSON Server).
 
+## 🎨 Design
+
+- [🖼️ Protótipo no Stitch](https://stitch.google.com/projects/6829441051223243915) - Telas da aplicação nas versões mobile e desktop.
+
 ## 💻 Tecnologias e Dependências
 
 - **Framework CSS:** MaterializeCSS
 - **JavaScript:**
   - **JSON Server** - para simular uma API REST.
+  - **D&D 5e API** - API pública para consumir dados de referência de RPG.
+
+### Por que MaterializeCSS?
+
+- **Componentes prontos que o projeto realmente usa:** cards (sistemas e reviews), modal (formulário de avaliação), tabs (perfil do usuário e painel de moderação), chips (filtros de gênero e mecânica), badges e campos de formulário com mensagens de validação.
+- **Layout responsivo mobile-first:** o grid de 12 colunas com classes como `s12 m6 l4` permite adaptar o catálogo de sistemas de 1 coluna no celular para 3 no desktop, sem escrever CSS de layout do zero.
+- **Componentes JavaScript do próprio framework:** modal, tabs, sidenav e select, que dão interatividade com pouco código.
+- **Personalização por variáveis:** as cores e fontes do design system podem ser ajustadas por variáveis, mantendo a identidade visual consistente em todas as telas.
+- **Material Design:** padrão visual conhecido e familiar ao usuário, com boa legibilidade em formulários, listas e cards, que são a base deste projeto.
+- **Curva de aprendizado baixa:** documentação simples e adotada como referência na disciplina (exemplo Roubank), o que facilita o desenvolvimento progressivo.
+
+### Por que a D&D 5e API?
+
+- **Tema alinhado ao projeto:** o Inessa RPG Reviews é sobre sistemas de RPG, e a API fornece dados de referência do D&D 5e (classes, magias, monstros, raças e equipamentos).
+- **Gratuita e sem autenticação:** não exige chave de API, o que simplifica o desenvolvimento e evita expor credenciais no front-end.
+- **REST com JSON:** fácil de consumir com `fetch`, sem backend próprio.
+- **Uso no projeto:** na página do sistema "Dungeons & Dragons 5e", uma seção "Conteúdo de referência" lista classes e magias vindas da API, com mensagem de erro amigável caso a requisição falhe.
 
 ## ✅ Checklist | Indicadores de Desempenho (ID) dos Resultados de Aprendizagem (RA)
 
 #### RA1 - Utilizar Frameworks CSS para estilização de elementos HTML e criação de layouts responsivos.
 
-- [ ] ID 01 - Prototipa interfaces adaptáveis para no mínimo os tamanhos de tela mobile e desktop, usando ferramentas de design tradicionais (Figma, Quant UX ou Sketch) ou IA (Stitch).
+- [x] ID 01 - Prototipa interfaces adaptáveis para no mínimo os tamanhos de tela mobile e desktop, usando ferramentas de design tradicionais (Figma, Quant UX ou Sketch) ou IA (Stitch).
 - [ ] ID 02 - Implementa layout responsivo com Framework CSS (Bootstrap, Materialize, Tailwind + DaisyUI) usando Flexbox ou Grid do próprio framework.
 - [ ] ID 03 - Implementa layout responsivo com CSS puro, usando Flexbox ou Grid Layout.
 - [ ] ID 04 - Utiliza componentes prontos de um Framework CSS (ex.: card, button) e componentes JavaScript do framework (ex.: modal, carousel).

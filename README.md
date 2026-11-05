@@ -16,7 +16,6 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 ## 🎨 Design
 
 - [🖼️ Protótipo no Stitch](https://stitch.google.com/projects/6829441051223243915) - Telas da aplicação nas versões mobile e desktop.
-- [🎨 Protótipo no Figma](https://www.figma.com/design/irXklBepiUmCvuS6FGtal6/Sem-t%C3%ADtulo?node-id=0-1) - Telas de alta fidelidade Mobile e Desktop do sistema.
 
 ## 💻 Tecnologias e Dependências
 
